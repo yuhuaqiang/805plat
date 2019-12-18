@@ -22,6 +22,9 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
+    "cssnano": "^4.1.10",
+    "cssnano-preset-advanced": "^4.0.7",
+    "postcss-px-to-viewport": "^1.1.1",
     "postcss-px2rem": "^0.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
@@ -44,9 +47,23 @@
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {},
-      "postcss-px2rem": {
-        "remUnit": 14
+      "postcss-px-to-viewport": {
+        "viewportWidth": 720,
+        "viewportHeight": 1280,
+        "unitPrecision": 3,
+        "viewportUnit": "vw",
+        "selectorBlackList": [
+          ".ignore",
+          ".hairlines",
+          ".hint"
+        ],
+        "minPixelValue": 1,
+        "mediaQuery": false
+      },
+      "cssnano": {
+        "preset": "default",
+        "autoprefixer": true,
+        "postcss-zindex": false
       }
     }
   },

@@ -61,30 +61,30 @@ export default {
 <style lang="stylus" scope>
 header {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 90px;
+  line-height: 90px;
   background: #F82A31;
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
   position: fixed;
+  font-size:40px;
   top: 0;
   color: #fff;
 
   .left, .right {
-    width: 40px;
+    width: 90px;
     text-align: center;
   }
 
   .title {
     flex: 1;
     text-align: center;
-    font-size: 16px;
   }
 
   .iconfont {
-    font-size: 18px;
+    font-size: 48px;
   }
 }
 </style>

@@ -2,10 +2,10 @@
   <div>
     <Xheader title="领奖" :back="false" right="icongenjinjilu"></Xheader>
      <Xcont :header="true">
-       <div>
+       <!-- <div>
         <cube-button @click="showtoast">loading</cube-button>
         <cube-button @click="showerror">错误提示</cube-button>
-      </div>
+      </div> -->
      </Xcont>
    
   </div>

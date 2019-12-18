@@ -2,7 +2,7 @@ import Vue from 'vue'
 import './cube-ui'
 
 import App from './App.vue'
-//import 'amfe-flexible'
+
 import '@/assets/styles/common.styl'
 import '@/assets/styles/iconfont.styl'
 import { router, store } from '@/common/index'

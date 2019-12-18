@@ -1,7 +1,6 @@
 import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import Vue from 'vue'
-import tabs from './tabs.js'
 import user from './user.js'
 
 Vue.use(Vuex)
@@ -13,6 +12,6 @@ const vuexLocal = new VuexPersistence({
 })
 
 export default new Vuex.Store({
-	modules: { tabs, user },
+	modules: { user },
 	plugins: [vuexLocal.plugin],
 })
