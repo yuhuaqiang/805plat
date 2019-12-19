@@ -11,5 +11,7 @@ export {
 	default as store
 }
 	from './store/index'
-mixin()
+
 vuse(plugins);
+
+mixin()

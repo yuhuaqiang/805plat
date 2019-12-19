@@ -4,7 +4,10 @@ export const baseUrl = 'https://m.805.com'//正式
 const api = {
     gettoken:{
         url:baseUrl+"/gamelogin/wechat",
-        auth:false
+    },
+    getuserinfo:{
+        url:baseUrl+"/gameuser/userinfo",
+        auth:true
     }
     
 }

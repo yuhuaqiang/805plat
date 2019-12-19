@@ -3,13 +3,10 @@ import store from '@/common/store'
 //import router, { loginUrl } from '@/common/router'
 import qs from 'qs'
 
-const instance = axios.create({
-	// baseURL: "/"
-	// withCredentials: true,
-})
-
 export const post = (api, data) => {
-	data = addCurrentUserParam(data)
+	if(api.auth){
+		data = addCurrentUserParam(data);
+	}
 	if (!(data instanceof FormData)) {
 		data = qs.stringify(data)
 	}
@@ -23,7 +20,10 @@ export const post = (api, data) => {
 }
 
 export const get = (api, data) => {
-	//data = addCurrentUserParam(data)
+	if(api.auth){
+		data = addCurrentUserParam(data);
+	}
+	
 	if (!(data instanceof FormData)) {
 		data = qs.stringify(data)
 	}
@@ -37,15 +37,12 @@ export const get = (api, data) => {
 }
 
 const addCurrentUserParam = (data = {}) => {
-	const current = store.state.user.current
-	if (current) {
-			const token = current.token		
-		if (token) {
-			if (data instanceof FormData) {
-				data.append('token', token)
-			} else {
-				data.token = token
-			}
+	const token = store.state.user.token
+	if (token) {
+		if (data instanceof FormData) {
+			data.append('token', token)
+		} else {
+			data.token = token
 		}
 	}
 	return data
