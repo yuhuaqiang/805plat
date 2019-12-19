@@ -5,9 +5,7 @@
       <div class="user-info">
         <div class="banner">
           <div class="avartar">
-            <img
-              :src="userinfo.face_src"
-            />
+            <img :src="userinfo.face_src" />
           </div>
           <div class="nickname-block">
             <div class="nickname">{{userinfo.nick_name}}</div>
@@ -21,12 +19,24 @@
           </div>
           <div class="bottom-block">
             <div class="item">
-              <div class="title"></div>
-              <div class="num"></div>
+              <div class="title">
+                <span>
+                  元宝
+                  <i class="iconfont icon-ingot"></i>
+                </span>
+                <i class="iconfont icon-arrow-right"></i>
+              </div>
+              <div class="num">99999</div>
             </div>
             <div class="item">
-              <div></div>
-              <div></div>
+              <div class="title">
+                <span>
+                  元宝
+                  <i class="iconfont icon-diamond"></i>
+                </span>
+                <i class="iconfont icon-arrow-right"></i>
+              </div>
+              <div class="num">99999</div>
             </div>
           </div>
         </div>
@@ -56,7 +66,6 @@ export default {
     async getuserinfo() {
       let userinfo = await this.$post(this.$api.getuserinfo, {});
       this.userinfo = userinfo;
-      console.log(userinfo);
     },
     gosetting() {
       this.$router.push("/mine/setting");
@@ -142,7 +151,25 @@ export default {
 
       .item {
         display: flex;
-        justify-content: flex-start;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 70px;
+        width: 50%;
+        font-size: $size-s;
+
+        .title {
+          display flex;
+          align-items center;
+          height 38px;
+          span{
+            margin-right $padding-l;
+          }
+          .iconfont {
+            font-size: $size-m;
+          }
+        }
+        .num {
+        }
       }
     }
   }
