@@ -36,7 +36,7 @@ module.exports = {
     proxy: {
       '/': {
         'ws': false,
-        'target': 'https://game.805.com',
+        'target': 'https://m.805.com/',
         "secure": false,
         'changeOrigin': true,
         'pathRewrite': {

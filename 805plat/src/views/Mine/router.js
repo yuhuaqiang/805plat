@@ -7,7 +7,6 @@ export default [
     component: Mine,
     meta: {
         sort: 4001,
-        auth: false,
     },
 },
 {
@@ -16,7 +15,6 @@ export default [
     component: Setting,
     meta: {
         sort: 4002,
-        auth: true,
     },
 },
 

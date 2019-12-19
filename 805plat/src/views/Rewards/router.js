@@ -6,6 +6,5 @@ export default [
         component: Rewards,
         meta: {
             sort: 3001,
-            auth: false,
         },
     },]

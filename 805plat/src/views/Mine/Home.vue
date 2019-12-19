@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
 export default {
@@ -50,15 +50,12 @@ export default {
     };
   },
   created() {
-    this.gettoken();
+    this.getuserinfo();
   },
   methods: {
-    async gettoken() {
-      //debugger
-      // let url=window.location.href
-      // window.location.href=this.$api.gettoken.url+"?url="+url;
-       //let user = await this.$get(this.$api.gettoken);
-      //console.log(user);
+    async getuserinfo() {
+      let userinfo = await this.$post(this.$api.getuserinfo, {});
+      console.log(userinfo);
     },
     gosetting() {
       this.$router.push("/mine/setting");
