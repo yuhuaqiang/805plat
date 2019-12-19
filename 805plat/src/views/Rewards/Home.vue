@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Xheader title="领奖" :back="false" right="icongenjinjilu"></Xheader>
+    <Xheader title="领奖" :back="false" right="icon-history-record"></Xheader>
      <Xcont :header="true">
        <!-- <div>
         <cube-button @click="showtoast">loading</cube-button>

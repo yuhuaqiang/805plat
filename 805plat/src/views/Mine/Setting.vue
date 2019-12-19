@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Xheader title="设置" :back="true" right="icongear">
+    <Xheader title="设置" :back="true" right="icon-home">
     </Xheader>
      <Xcont :header="true" ></Xcont>
   </div>
