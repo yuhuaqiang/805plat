@@ -6,18 +6,18 @@
         <div class="banner">
           <div class="avartar">
             <img
-              src="http://thirdwx.qlogo.cn/mmopen/NfDs8xSjTia3xrSHqPibVibqtKgxkWfWcWdujvF7stqI6a8t2kEEkUv2n5xwscsxia8x9HcsoUJtRLqCADJ8j1LLGw/132"
+              :src="userinfo.face_src"
             />
           </div>
           <div class="nickname-block">
-            <div class="nickname">昵称</div>
-            <div class="account">ID:123456</div>
+            <div class="nickname">{{userinfo.nick_name}}</div>
+            <div class="account">ID:{{userinfo.user_id}}</div>
           </div>
         </div>
         <div class="detail-block">
           <div class="top-block">
             <div class="title">我已薅到的羊毛(元)</div>
-            <div class="num">550.25</div>
+            <div class="num">{{userinfo.charm}}</div>
           </div>
           <div class="bottom-block">
             <div class="item">
@@ -46,7 +46,7 @@ export default {
   },
   data() {
     return {
-      name: ""
+      userinfo: ""
     };
   },
   created() {
@@ -55,6 +55,7 @@ export default {
   methods: {
     async getuserinfo() {
       let userinfo = await this.$post(this.$api.getuserinfo, {});
+      this.userinfo = userinfo;
       console.log(userinfo);
     },
     gosetting() {

@@ -7,28 +7,29 @@ import qs from 'qs'
 const instance = axios.create({
 })
 
-// instance.interceptors.response.use(response => {
-//     if (response.status === 200) {
-//         let { status, msg, data, code } = response.data;
-//         if (status === 'true' || status === true) {
-//             return data;
-//         } else if (status === 'false' || status === false || status === 0) {
-//             return Promise.reject(response.data);
-//         }
-//     } else {
-//         alert(response.status);
-//     }
-// }, error => {
-//     if (!error.response) {
-//         alert('网络异常,请检查网络');
-//     } else {
-//         alert('请求失败');
-//     }
-//     return Promise.reject(error.response);
-// })
+instance.interceptors.response.use(response => {    
+    if (response.status === 200) {
+        let { status, msg, data } = response.data;
+        if (status == '200') {            
+            return data;
+        } else {
+            return Promise.reject(response.data);
+        }
+    } else {
+        //alert(response.status);
+    }
+}, error => {
+    if (!error.response) {
+        //alert('网络异常,请检查网络');
+    } else {
+        //alert('请求失败');
+    }
+    return Promise.reject(error.response);
+})
 
 export const post = (api, data) => {
-	let token=store.state.user.token;
+    let token=store.state.user.token;
+    console.log(token);
 	if(token){
 		instance.defaults.headers.common['token'] = token;
 	}
