@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Xheader title="设置" :back="true" right="icon-home"></Xheader>
+		<Xheader title="设置" :back="true"></Xheader>
 		 <Xcont :header="true">
 			 <template>
 		 		<!-- 手机号码 -->
@@ -10,9 +10,9 @@
 							<span>手机号码</span>
 						</div>
 						<div class="set_c">
-							<span>去设置</span>
+							<span>绑定手机</span>
 						</div>
-						<div class="set_r"></div>
+						<div class="set_r" @click="toPhone()"></div>
 					</div>
 					<!-- 实名认证 -->
 					<div class="set_child">
@@ -22,7 +22,7 @@
 						<div class="set_c">
 							<span>去认证</span>
 						</div>
-						<div class="set_r"></div>
+						<div class="set_r" @click="toName()"></div>
 					</div>
 					<!-- 联系地址 -->
 					<div class="set_child">
@@ -32,7 +32,7 @@
 						<div class="set_c">
 							<span>请输入您的联系地址</span>
 						</div>
-						<div class="set_r"></div>
+						<div class="set_r" @click="toAddress()"></div>
 					</div>
 				</div>
 			 </template>
@@ -52,6 +52,17 @@ export default {
 		return {
 			name: ""
 		};
+	},
+	methods:{
+		toPhone:function(){
+			this.$router.push("/mine/setting/phone");
+		},
+		toName:function(){
+			this.$router.push("/mine/setting/realname");
+		},
+		toAddress:function(){
+			this.$router.push("/mine/setting/address");
+		}
 	}
 };
 </script>
