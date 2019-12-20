@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Xheader title="更换绑定手机号" :back="true"></Xheader>
+		<Xheader title="更换/绑定手机号" :back="true"></Xheader>
 		 <Xcont :header="true">
 			 <template>
 				<div class="set_con">
@@ -108,7 +108,7 @@ export default {
 			display: flex;
 			align-items:center;
 			.set_l{
-				font-size: $size-xs;
+				font-size: $size-s;
 				color: $color-deep;
 				margin-right: 20px;
 			}
@@ -125,7 +125,7 @@ export default {
 			.set_r{
 				margin-left: 15px;
 				button{
-					font-size: $size-xxs;
+					font-size: $size-xs;
 					width: 150px;
 					height: 40px;
 				}

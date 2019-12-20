@@ -83,14 +83,14 @@ export default {
 			display: flex;
 			align-items:center;
 			.set_l{
-				font-size: $size-xs;
+				font-size: $size-s;
 				color: $color-deep;
 			}
 			.set_c{
 				flex: 1;
 				text-align: right;
 				margin-right: 20px;
-				font-size: $size-xxs;
+				font-size: $size-xs;
 				color: $color-deep;
 			}
 			.set_r{
