@@ -34,9 +34,7 @@ export default {
   
   },
   watch: {
-    $route(to) {
-      this.settab(to.path);
-    }
+   
   },
   methods: {
   
@@ -45,11 +43,5 @@ export default {
 </script>
 
 <style>
-iframe {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-}
 
 </style>
