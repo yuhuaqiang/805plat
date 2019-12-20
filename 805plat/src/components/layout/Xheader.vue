@@ -2,7 +2,7 @@
   <header>
     <div class="left" @click="handleLeft">
       <slot name="left" v-if="back">
-        <span class="iconfont iconarrow-left"></span>
+        <span class="iconfont icon-arrow-left"></span>
       </slot>
     </div>
     <div class="title">

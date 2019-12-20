@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Xheader title="个人中心" :back="false" right="icon-gear" @rightClick="gosetting"></Xheader>
+    <Xheader title="个人中心" :back="false" right="icon-gear" @rightClick="navigate('/mine/setting')"></Xheader>
     <Xcont :header="true">
       <div class="user-info">
         <div class="banner">
@@ -21,25 +21,57 @@
             <div class="item">
               <div class="title">
                 <span>
-                  元宝
+                  金豆
                   <i class="iconfont icon-ingot"></i>
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">99999</div>
+              <div class="num">{{userinfo.bean}}</div>
             </div>
             <div class="item">
               <div class="title">
                 <span>
-                  元宝
+                  积分
                   <i class="iconfont icon-diamond"></i>
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">99999</div>
+              <div class="num">{{userinfo.ticket}}</div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="list-block">
+        <ul class="list">
+          <li class="item" @click="navigate('/mine/Coupon')">
+            <span class="item-icon">
+              <i class="iconfont icon-coupon"></i>
+            </span>
+            <span class="item-text">优惠券</span>
+            <span class="item-arrow">
+              <i class="iconfont icon-arrow-right"></i>
+            </span>
+          </li>
+         
+          <li class="item" @click="navigate('/mine/Purchase')">
+            <span class="item-icon">
+              <i class="iconfont icon-wallet"></i>
+            </span>
+            <span class="item-text">充值</span>
+            <span class="item-arrow">
+              <i class="iconfont icon-arrow-right"></i>
+            </span>
+          </li>
+          <li class="item" @click="navigate('/order/Orderlist')">
+            <span class="item-icon">
+              <i class="iconfont icon-menu"></i>
+            </span>
+            <span class="item-text">商品订单记录</span>
+            <span class="item-arrow">
+              <i class="iconfont icon-arrow-right"></i>
+            </span>
+          </li>
+        </ul>
       </div>
     </Xcont>
   </div>
@@ -60,7 +92,7 @@ export default {
     };
   },
   created() {
-    this.getuserinfo();
+     this.getuserinfo();
   },
   methods: {
     async getuserinfo() {
@@ -69,6 +101,9 @@ export default {
     },
     gosetting() {
       this.$router.push("/mine/setting");
+    },
+    navigate(path) {
+       this.$router.push(path);
     }
   }
 };
@@ -158,17 +193,67 @@ export default {
         font-size: $size-s;
 
         .title {
-          display flex;
-          align-items center;
-          height 38px;
-          span{
-            margin-right $padding-l;
+          display: flex;
+          align-items: center;
+          height: 38px;
+
+          span {
+            margin-right: $padding-l;
           }
+
           .iconfont {
             font-size: $size-m;
           }
         }
+
         .num {
+        }
+      }
+    }
+  }
+}
+
+.list-block {
+  width: $width-content;
+  background: #fff;
+  border-radius: $size-radius $size-radius 0 0;
+  margin: $padding-xxl auto 0;
+  height: calc(100vh - 615px);
+  overflow-y: auto;
+
+  .list {
+    width: 100%;
+    padding: $padding-l $padding-xxxl;
+
+    .item {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $color-border;
+
+      &-icon {
+        width: 80px;
+
+        .iconfont {
+          font-size: $size-icon-l;
+          color: $color-deep;
+        }
+      }
+
+      &-text {
+        flex: 1;
+        color: $color-deep;
+      }
+
+      &-arrow {
+        width: 80px;
+        text-align: right;
+
+        .iconfont {
+          font-size: $size-icon-m;
+          color: $color-border;
         }
       }
     }

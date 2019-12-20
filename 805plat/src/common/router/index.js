@@ -3,13 +3,15 @@ import Router from 'vue-router'
 import Rank from '@/views/Rank/router'
 import Rewards from '@/views/Rewards/router'
 import Mine from '@/views/Mine/router'
+import Order from '@/views/Order/router'
 //import store from '@/common/store'
 
 Vue.use(Router)
 const routes = [
 	...Rank,
     ...Rewards,
-	...Mine
+	...Mine,
+	...Order
 ]
 
 export const keepAlives = routes.filter(r => r.meta && r.meta.keepalive === true).map(r => r.name)

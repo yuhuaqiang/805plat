@@ -15,6 +15,7 @@ export default () => {
                 this.$router.push(this.$route.path);
             }
             if (!this.currentUser && !token) {
+                
                 window.location.href = this.$api.gettoken + "?url=" + url;
             }
         },
