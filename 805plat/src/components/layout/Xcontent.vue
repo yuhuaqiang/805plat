@@ -1,5 +1,5 @@
 <template>
-  <div class="x-cont" :style="`margin-top: ${margintop}; `">
+  <div class="x-cont" :style="`padding-top: ${margintop}; `">
     <slot></slot>
   </div>
 </template>
@@ -30,5 +30,7 @@ export default {
 .x-cont {
   width: 100vw;
   overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
 }
 </style>
