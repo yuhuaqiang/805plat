@@ -62,6 +62,7 @@ export default {
 	methods:{
 		async getuserbaseinfo() {
 	      let res = await this.$post(this.$api.getuserbaseinfo,"");
+	      console.log(res)
 	      this.phone = res.userExt.phone;
 	      this.address = res.userExt.address == null ? '' : res.userExt.address;
 	    },
