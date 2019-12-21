@@ -206,6 +206,8 @@ export default {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          height 40px;
+          line-height 40px;
         }
 
         .pro {

@@ -14,8 +14,8 @@
         </div>
         <div class="detail-block">
           <div class="top-block">
-            <div class="title">我已薅到的羊毛(元)</div>
-            <div class="num">{{userinfo.charm}}</div>
+            <div class="title">已为我节省</div>
+            <div class="num"><span>￥</span>{{userinfo.charm | fmoney}}</div>
           </div>
           <div class="bottom-block">
             <div class="item">
@@ -52,7 +52,7 @@
               <i class="iconfont icon-arrow-right"></i>
             </span>
           </li>
-         
+
           <li class="item" @click="navigate('/mine/Purchase')">
             <span class="item-icon">
               <i class="iconfont icon-wallet"></i>
@@ -88,25 +88,25 @@ export default {
   },
   data() {
     return {
-      userinfo: "",
+      userinfo: ""
       //baseinfo:""
     };
   },
   created() {
-     this.getuserinfo();
-  //   this.getbasenfo();
+    this.getuserinfo();
+    //   this.getbasenfo();
   },
   methods: {
     async getuserinfo() {
       let userinfo = await this.$post(this.$api.getuserinfo, {});
       this.userinfo = userinfo;
     },
-     async getbasenfo() {
+    async getbasenfo() {
       let baseinfo = await this.$post(this.$api.getbasenfo, {});
       this.baseinfo = baseinfo;
     },
     navigate(path) {
-       this.$router.push(path);
+      this.$router.push(path);
     }
   }
 };
@@ -177,6 +177,9 @@ export default {
       }
 
       .num {
+        span{
+          font-size:$size-m;
+        }
         font-size: $size-xl;
       }
     }
