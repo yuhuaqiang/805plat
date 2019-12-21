@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.response.use(response => {    
     if (response.status === 200) {
         let { status, msg, data } = response.data;
-        if (status == '200') {            
+        if (status == '200') {     
             return data;
         } else {
             return Promise.reject(response.data);
