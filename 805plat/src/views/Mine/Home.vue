@@ -2,7 +2,7 @@
   <div>
     <Xheader title="个人中心" :back="false" right="icon-gear" @rightClick="navigate('/mine/setting')"></Xheader>
     <Xcont :header="true">
-      <div class="user-info">
+      <div class="user-info" @Click="navigate('/mine/setting')">
         <div class="banner">
           <div class="avartar">
             <img :src="userinfo.face_src" />
@@ -88,19 +88,22 @@ export default {
   },
   data() {
     return {
-      userinfo: ""
+      userinfo: "",
+      //baseinfo:""
     };
   },
   created() {
      this.getuserinfo();
+  //   this.getbasenfo();
   },
   methods: {
     async getuserinfo() {
       let userinfo = await this.$post(this.$api.getuserinfo, {});
       this.userinfo = userinfo;
     },
-    gosetting() {
-      this.$router.push("/mine/setting");
+     async getbasenfo() {
+      let baseinfo = await this.$post(this.$api.getbasenfo, {});
+      this.baseinfo = baseinfo;
     },
     navigate(path) {
        this.$router.push(path);

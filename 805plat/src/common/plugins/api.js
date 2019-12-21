@@ -5,6 +5,8 @@ export const baseUrl=""
 const api = {
     gettoken:baseUrl+"/gamelogin/wechat",
     getuserinfo:baseUrl+"/gameuser/userinfo",
+    getuserinfo:baseUrl+"/gameuser/userinfo",
+    getbaseinfo:baseUrl+"/gameuser/userinfo",
 }
 
 export default api

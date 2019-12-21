@@ -34,9 +34,7 @@ export default {
   
   },
   watch: {
-    $route(to) {
-      this.settab(to.path);
-    }
+  
   },
   methods: {
   

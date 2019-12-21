@@ -5,34 +5,34 @@
 			 <template>
 		 		<!-- 手机号码 -->
 				<div class="set_con">
-					<div class="set_child">
+					<div class="set_child"@click="toPhone()">
 						<div class="set_l">
 							<span>手机号码</span>
 						</div>
 						<div class="set_c">
 							<span>绑定手机</span>
 						</div>
-						<div class="set_r" @click="toPhone()"></div>
+						<div class="set_r" ></div>
 					</div>
 					<!-- 实名认证 -->
-					<div class="set_child">
+					<div class="set_child" @click="toName()">
 						<div class="set_l">
 							<span>实名认证(防沉迷)</span>
 						</div>
 						<div class="set_c">
 							<span>去认证</span>
 						</div>
-						<div class="set_r" @click="toName()"></div>
+						<div class="set_r"></div>
 					</div>
 					<!-- 联系地址 -->
-					<div class="set_child">
+					<div class="set_child" @click="toAddress()">
 						<div class="set_l">
 							<span>联系地址</span>
 						</div>
 						<div class="set_c">
 							<span>请输入您的联系地址</span>
 						</div>
-						<div class="set_r" @click="toAddress()"></div>
+						<div class="set_r"></div>
 					</div>
 				</div>
 			 </template>
