@@ -9,12 +9,12 @@
 							<span>联系地址</span>
 						</div>
 						<div class="set_c">
-							<input type="text" name="" placeholder="请输入联系地址">
+							<textarea placeholder="请填写详细地址" v-model="address"></textarea>
 						</div>
 					</div>
 					<!-- 按钮 -->
 					<div class="btn">
-						<cube-button :primary="true">提交</cube-button>
+						<cube-button :primary="true" @click="addAddress()">提 交</cube-button>
 					</div>
 				</div>
 			 </template>
@@ -32,10 +32,30 @@ export default {
 	},
 	data() {
 		return {
-			name: "",
-			status: false,
-			value:''
+			address:''
 		};
+	},
+	methods:{
+		async addAddress(){
+			// 判断地址不能为空
+			if(this.address == ''){
+				this.toast = this.$createToast({
+			        txt: '请填写地址',
+			        type: 'txt'
+			    })
+			    this.toast.show();
+			    return false;
+			}
+			let res = await this.$post(this.$api.address,{
+				address: this.address
+			});
+		}
+	},
+	created(){
+		//this.address = this.$route.params.address;
+	},
+	mounted(){
+
 	}
 };
 </script>
@@ -47,6 +67,7 @@ export default {
 		border-radius: $size-radius;
 		margin: 0 auto;
 		margin-top: 11px;
+		overflow: hidden;
 		.set_child{
 			width: 612px;
 			height: 146px;
@@ -62,11 +83,16 @@ export default {
 			}
 			.set_c{
 				flex: 1;
-				input{
+				textarea{
 					border: none;
+					width: 400px;
+					height: 130px;
+					resize: none;
 					outline: none;
 					font-size: $size-xs;
 					color: $color-deep;
+					padding-top: 50px;
+					line-height: 1.5;
 				}
 			}
 			.set_r{

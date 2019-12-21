@@ -10,12 +10,13 @@
 							<span>手机号码</span>
 						</div>
 						<div class="set_c">
-							<span>绑定手机</span>
+							<span v-if="phone == ''">去绑定</span>
+							<span v-else>{{phone}}</span>
 						</div>
 						<div class="set_r"></div>
 					</div>
 					<!-- 实名认证 -->
-					<div class="set_child" @click="toName()">
+					<!-- <div class="set_child" @click="toName()">
 						<div class="set_l">
 							<span>实名认证(防沉迷)</span>
 						</div>
@@ -23,14 +24,15 @@
 							<span>去认证</span>
 						</div>
 						<div class="set_r"></div>
-					</div>
+					</div> -->
 					<!-- 联系地址 -->
 					<div class="set_child" @click="toAddress()">
 						<div class="set_l">
 							<span>联系地址</span>
 						</div>
 						<div class="set_c">
-							<span>请输入您的联系地址</span>
+							<span v-if="address == ''">请输入您的联系地址</span>
+							<span v-else>{{address}}</span>
 						</div>
 						<div class="set_r"></div>
 					</div>
@@ -50,18 +52,37 @@ export default {
 	},
 	data() {
 		return {
-			name: ""
+			address:'',//地址
+			phone:'' //电话号码
 		};
 	},
+	created(){
+		this.getuserbaseinfo();
+	},
 	methods:{
+		async getuserbaseinfo() {
+	      let res = await this.$post(this.$api.getuserbaseinfo,"");
+	      this.phone = res.userExt.phone;
+	      this.address = res.userExt.address == null ? '' : res.userExt.address;
+	    },
 		toPhone:function(){
-			this.$router.push("/mine/setting/phone");
+			this.$router.push({
+				name:"BindingPhone",
+				params:{
+					phone: this.phone
+				}
+			});
 		},
 		toName:function(){
 			this.$router.push("/mine/setting/realname");
 		},
 		toAddress:function(){
-			this.$router.push("/mine/setting/address");
+			this.$router.push({
+				name:"Address",
+				params:{
+					address:this.address
+				}
+			});
 		}
 	}
 };

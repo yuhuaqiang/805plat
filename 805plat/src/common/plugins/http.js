@@ -29,7 +29,7 @@ instance.interceptors.response.use(response => {
 
 export const post = (api, data) => {
     let token=store.state.user.token;
-    console.log(token);
+    //console.log(token);
 	if(token){
 		instance.defaults.headers.common['token'] = token;
 	}

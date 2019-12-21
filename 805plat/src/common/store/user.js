@@ -1,5 +1,5 @@
 const state = {
-	token: "",
+	token: "72448210a22d5f2a8072ae4977ace851",
 }
 
 const actions = {
