@@ -77,7 +77,7 @@ export default {
 			display: flex;
 			align-items:center;
 			.set_l{
-				font-size: $size-s;
+				font-size: $size-xs;
 				color: $color-deep;
 				margin-right: 20px;
 			}

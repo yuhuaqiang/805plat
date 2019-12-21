@@ -12,6 +12,7 @@ export default [
     component: Mine,
     meta: {
         sort: 4001,
+        keepalive: true,
     },
 },
 {

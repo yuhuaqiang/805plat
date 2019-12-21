@@ -88,38 +88,42 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-	.set_con{
-		width: 668px;
-		height: calc(100% - 22px);
-		background: #fff;
-		border-radius: $size-radius;
-		margin: 0 auto;
-		margin-top: 11px;
-		.set_child{
-			width: 612px;
-			height: 146px;
-			border-bottom: 2px solid #d4d4d4;
-			margin: 0 auto;
-			padding: 0 5px;
-			display: flex;
-			align-items:center;
-			.set_l{
-				font-size: $size-s;
-				color: $color-deep;
-			}
-			.set_c{
-				flex: 1;
-				text-align: right;
-				margin-right: 20px;
-				font-size: $size-xs;
-				color: $color-deep;
-			}
-			.set_r{
-				width: 18px;
-				height: 33px;
-				background: url('assets/images/T_bg_more2.png') no-repeat;
-				background-size: 100% 100%;
-			}
-		}
-	}
+.set_con {
+  width: 668px;
+  height: calc(100% - 22px);
+  background: #fff;
+  border-radius: $size-radius;
+  margin: 0 auto;
+  margin-top: 11px;
+
+  .set_child {
+    width: 612px;
+    height: 146px;
+    border-bottom: 2px solid #d4d4d4;
+    margin: 0 auto;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+
+    .set_l {
+      font-size: $size-s;
+      color: $color-deep;
+    }
+
+    .set_c {
+      flex: 1;
+      text-align: right;
+      margin-right: 20px;
+      font-size: $size-xs;
+      color: $color-deep;
+    }
+
+    .set_r {
+      width: 18px;
+      height: 33px;
+      background: url('assets/images/T_bg_more2.png') no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+}
 </style>
