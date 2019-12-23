@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/common/store'
 //import router, { loginUrl } from '@/common/router'
+import {Toast} from 'cube-ui'
 import qs from 'qs'
 
 
@@ -17,7 +18,13 @@ instance.interceptors.response.use(response => {
             }            
             return Object.assign(_data,data);
         } else {
-            return Promise.reject(response.data);
+            //return Promise.reject(response.data);
+            let toast = Toast.$create({
+                txt: msg,
+                type: 'txt',
+                time: 1500
+            })
+            toast.show();
         }
     } else {
         //alert(response.status);
