@@ -2,8 +2,8 @@
   <div>
     <Xheader title="个人中心" :back="false" right="icon-gear" @rightClick="navigate('/mine/setting')"></Xheader>
     <Xcont :header="true">
-      <div class="user-info" @Click="navigate('/mine/setting')">
-        <div class="banner">
+      <div class="user-info">
+        <div class="banner" @click="navigate('/mine/setting')">
           <div class="avartar">
             <img :src="userinfo.face_src" />
           </div>
@@ -18,7 +18,7 @@
             <div class="num"><span>￥</span>{{userinfo.charm | fmoney}}</div>
           </div>
           <div class="bottom-block">
-            <div class="item">
+            <div class="item" @click="navigate('/mine/bean')">
               <div class="title">
                 <span>
                   金豆
@@ -28,7 +28,7 @@
               </div>
               <div class="num">{{userinfo.bean}}</div>
             </div>
-            <div class="item">
+            <div class="item" @click="navigate('/mine/point')">
               <div class="title">
                 <span>
                   积分
@@ -80,6 +80,7 @@
 import axios from "axios";
 import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
+
 export default {
   name: "Mine",
   components: {

@@ -2,7 +2,7 @@
   <div>
     <Xheader title="我的优惠券" :back="true"></Xheader>
     <Xcont :header="true">
-      <div class="coupon-container">
+      <div class="container">
         <div class="tab-container">
           <cube-tab-bar class="tab-rank" v-model="selectedLabel" show-slider inline>
             <cube-tab v-for="(item) in tabs" :label="item.label" :key="item.label">
@@ -119,19 +119,6 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.coupon-container {
-  background: #fff;
-  border-radius: $size-radius;
-  width: $width-content;
-  margin: $padding-s auto;
-  height: calc(100% - 20px);
-}
-
-.tab-container {
-  width: 100%;
-  padding: $padding-m;
-}
-
 .list-container {
   height: calc(100% - 80px);
 

@@ -5,6 +5,8 @@ import Coupon from '@/views/Mine/Coupon.vue'
 import BindingPhone from '@/views/Mine/Binding_mobile_phone.vue'
 import Address from '@/views/Mine/Address.vue'
 import Realname from '@/views/Mine/Realname.vue'
+import Bean from '@/views/Mine/Bean.vue'
+import Point from '@/views/Mine/Point.vue'
 export default [
 {
     path: '/',
@@ -61,6 +63,20 @@ export default [
     component: Address,
     meta: {
         sort: 4005,
+    },
+},
+{
+    path: '/mine/Bean',
+    name: 'Bean',
+    component: Bean,
+    meta: {
+    },
+},
+{
+    path: '/mine/Point',
+    name: 'Point',
+    component: Point,
+    meta: {
     },
 },
 

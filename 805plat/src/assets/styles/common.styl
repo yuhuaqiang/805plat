@@ -1,17 +1,29 @@
-@require "./var.styl"
-*{
+@require './var.styl';
+
+* {
     box-sizing: border-box;
 }
 
-html,body{
-    font-size:30px;
-    background $color-bg;
+html, body {
+    font-size: 30px;
+    background: $color-bg;
     height: 100%;
 }
 
-.tab-title{
-    font-size:$size-m;
-    margin-bottom $padding-m
+.container {
+    background: #fff;
+    border-radius: $size-radius;
+    width: $width-content;
+    margin: $padding-s auto;
+    height: calc(100% - 20px);
 }
 
+.tab-container {
+    width: 100%;
+    padding: $padding-m;
 
+    .tab-title {
+        font-size: $size-m;
+        margin-bottom: $padding-m;
+    }
+}

@@ -49,21 +49,10 @@ export default {
 			let res = await this.$post(this.$api.address,{
 				address: this.address
 			});
-			if(res && res._status == '200'){
-				this.toast = this.$createToast({
-			        txt: res._msg,
-			        type: 'txt',
-			        time: 1000,
-			        onTimeout: () => {
-			          this.$router.push("/mine/setting");
-			        }
-			    })
-			    this.toast.show();
-			}
 		}
 	},
 	created(){
-		this.address = this.$route.params.address;
+		//this.address = this.$route.params.address;
 	},
 	mounted(){
 
