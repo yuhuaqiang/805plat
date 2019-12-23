@@ -10,8 +10,12 @@ const instance = axios.create({
 instance.interceptors.response.use(response => {    
     if (response.status === 200) {
         let { status, msg, data } = response.data;
-        if (status == '200') {     
-            return data;
+        if (status == '200') {
+            let _data = {
+                _status:status,
+                _msg:msg
+            }            
+            return Object.assign(_data,data);
         } else {
             return Promise.reject(response.data);
         }
@@ -33,6 +37,9 @@ export const post = (api, data) => {
 	if(token){
 		instance.defaults.headers.common['token'] = token;
 	}
+    if (!(data instanceof FormData)) {
+        data = qs.stringify(data)
+    }
     return new Promise((resolve, reject) => {
         instance.post(api, data).then(response => {
             resolve(response)
