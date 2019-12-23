@@ -18,7 +18,13 @@
       <Stitle title="积分明细" icon="icon-diamond"></Stitle>
       <div class="list-block">
         <div class="tab-container">
-          <cube-tab-bar class="tab-rank" v-model="selectedLabel" show-slider inline>
+          <cube-tab-bar
+            class="tab-rank"
+            v-model="selectedLabel"
+            show-slider
+            inline
+            @change="changeHandler"
+          >
             <cube-tab v-for="(item) in tabs" :label="item.label" :key="item.label">
               <i slot="icon" class="iconfont" :class="item.icon"></i>
               <div class="tab-title" slot="default">{{item.label}}</div>
@@ -26,7 +32,20 @@
           </cube-tab-bar>
         </div>
         <div class="list-container">
-          <ListItem title="官方赠送：测试123" time="2019-12-30 12:30:43" num="+10000"></ListItem>
+          <cube-tab-panels v-model="selectedLabel">
+            <cube-tab-panel v-for="item in tabs" :label="item.label" :key="item.label">
+              <template v-if="item.list.length>0">
+                <ListItem
+                  v-for="recorditem in item.list"
+                  :key="recorditem.name"
+                  :title="recorditem.name"
+                  :time="recorditem.time"
+                  :num="recorditem.num"
+                ></ListItem>
+              </template>
+              <Empty :tip="tip" v-else></Empty>
+            </cube-tab-panel>
+          </cube-tab-panels>
         </div>
       </div>
     </Xcont>
@@ -37,13 +56,15 @@ import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
 import Stitle from "@/components/units/separate_title.vue";
 import ListItem from "@/components/units/list-item.vue";
+import Empty from "@/components/units/empty-block.vue";
 export default {
   name: "Point",
   components: {
     Xheader,
     Xcont,
     Stitle,
-    ListItem
+    ListItem,
+    Empty
   },
   data() {
     return {
@@ -51,14 +72,38 @@ export default {
       tabs: [
         {
           label: "收入",
-          icon: "icon-shouru"
+          icon: "icon-shouru",
+          list: [
+            {
+              name: "官方赠送：测试123",
+              time: "2019-12-30 12:30:43",
+              num: "1000"
+            },
+            {
+              name: "官方赠送：测试1235",
+              time: "2019-12-30 12:30:43",
+              num: "2000"
+            },
+            {
+              name: "官方赠送：测试1234",
+              time: "2019-12-30 12:30:43",
+              num: "3000"
+            }
+          ]
         },
         {
           label: "支出",
-          icon: "icon-zhichu"
+          icon: "icon-zhichu",
+          list: []
         }
-      ]
+      ],
+      tip: ""
     };
+  },
+  methods: {
+    changeHandler(label) {
+      this.tip = `最近暂无${label}记录~`;
+    }
   }
 };
 </script>

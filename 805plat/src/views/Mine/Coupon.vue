@@ -38,10 +38,11 @@
                   </dd>
                 </dl>
               </template>
-              <div class="empty-block" v-else>
+              <Empty icon="icon-coupon-text" tip="亲，暂无优惠券哦~" v-else></Empty>
+              <!-- <div class="empty-block">
                 <span class="iconfont icon-coupon-text"></span>
-                <span>亲，暂无优惠券哦~</span>
-              </div>
+                <span></span>
+              </div> -->
             </cube-tab-panel>
           </cube-tab-panels>
         </div>
@@ -52,11 +53,13 @@
 <script>
 import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
+import Empty from "@/components/units/empty-block.vue";
 export default {
   name: "Coupon",
   components: {
     Xheader,
-    Xcont
+    Xcont,
+    Empty
   },
   data() {
     return {
@@ -122,20 +125,20 @@ export default {
 .list-container {
   height: calc(100% - 80px);
 
-  .empty-block {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: $color-shallow;
+//   .empty-block {
+//     height: 100%;
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     color: $color-shallow;
 
-    .iconfont {
-      font-size: 140px;
-      margin-bottom: $padding-s;
-    }
-  }
+//     .iconfont {
+//       font-size: 140px;
+//       margin-bottom: $padding-s;
+//     }
+//   }
 
   dl {
     width: 100%;

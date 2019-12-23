@@ -15,7 +15,10 @@
         <div class="detail-block">
           <div class="top-block">
             <div class="title">已为我节省</div>
-            <div class="num"><span>￥</span>{{userinfo.charm | fmoney}}</div>
+            <div class="num">
+              <span>￥</span>
+              {{userinfo.charm | fmoney}}
+            </div>
           </div>
           <div class="bottom-block">
             <div class="item" @click="navigate('/mine/bean')">
@@ -178,9 +181,12 @@ export default {
       }
 
       .num {
-        span{
-          font-size:$size-m;
+        margin-top: 40px;
+
+        span {
+          font-size: $size-m;
         }
+
         font-size: $size-xl;
       }
     }
