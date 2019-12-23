@@ -42,10 +42,12 @@ export default {
     color: $color-regular-blue;
     padding: 0 40px;
     background: $color-bg;
+    display: flex;
+    align-items: center;
 
     .iconfont {
       font-size: $size-l;
-      margin-right $padding-s
+      margin-right: $padding-s;
     }
   }
 
