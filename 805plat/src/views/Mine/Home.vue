@@ -92,13 +92,13 @@ export default {
   },
   data() {
     return {
-      userinfo: ""
-      //baseinfo:""
+      userinfo: "",
+      baseinfo:""
     };
   },
   created() {
     this.getuserinfo();
-    //   this.getbasenfo();
+    //this.getbasenfo();
   },
   methods: {
     async getuserinfo() {

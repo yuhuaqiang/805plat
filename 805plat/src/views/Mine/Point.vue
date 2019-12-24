@@ -74,21 +74,21 @@ export default {
           label: "收入",
           icon: "icon-shouru",
           list: [
-            {
-              name: "官方赠送：测试123",
-              time: "2019-12-30 12:30:43",
-              num: "1000"
-            },
-            {
-              name: "官方赠送：测试1235",
-              time: "2019-12-30 12:30:43",
-              num: "2000"
-            },
-            {
-              name: "官方赠送：测试1234",
-              time: "2019-12-30 12:30:43",
-              num: "3000"
-            }
+            // {
+            //   name: "官方赠送：测试123",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "1000"
+            // },
+            // {
+            //   name: "官方赠送：测试1235",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "2000"
+            // },
+            // {
+            //   name: "官方赠送：测试1234",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "3000"
+            // }
           ]
         },
         {
@@ -100,9 +100,32 @@ export default {
       tip: ""
     };
   },
+  created(){
+    this.getincomelist();
+    this.getpaylist();
+  },
   methods: {
     changeHandler(label) {
       this.tip = `最近暂无${label}记录~`;
+    },
+    async getincomelist() {
+      let param = {
+        type: 2,
+        page: this.incomepage
+      };
+      let incomelist = await this.$get(this.$api.getpointlist, param);
+      console.log(incomelist);
+      this.incomepage += 1;
+    },
+
+    async getpaylist() {
+      let param = {
+        type: 1,
+        page: this.paypage
+      };
+      let paylist = await this.$get(this.$api.getpointlist, param);
+      console.log(paylist);
+      this.paypage += 1;
     }
   }
 };

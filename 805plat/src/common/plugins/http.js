@@ -1,15 +1,20 @@
 import axios from 'axios'
 import store from '@/common/store'
 //import router, { loginUrl } from '@/common/router'
-import {Toast} from 'cube-ui'
+import { Toast } from 'cube-ui'
 import qs from 'qs'
 
 
 const instance = axios.create({
 })
 
+let token = store.state.user.token;
+if (token) {
+    instance.defaults.headers.common['token'] = token;
+}
+
 instance.interceptors.response.use(response => {
- 
+
     if (response.status === 200) {
         let { status, msg, data } = response.data;
         if (status == '200') {
@@ -40,11 +45,6 @@ instance.interceptors.response.use(response => {
 })
 
 export const post = (api, data) => {
-    let token = store.state.user.token;
-    //console.log(token);
-    if (token) {
-        instance.defaults.headers.common['token'] = token;
-    }
     if (!(data instanceof FormData)) {
         data = qs.stringify(data)
     }
@@ -58,9 +58,9 @@ export const post = (api, data) => {
 }
 
 export const get = (api, data) => {
-    data = addCurrentUserParam(data);
+   // data = addCurrentUserParam(data);
     return new Promise((resolve, reject) => {
-        instance.get(api, data).then(response => {
+        instance.get(api, {params:data}).then(response => {
             resolve(response)
         }).catch(error => {
             reject(error)

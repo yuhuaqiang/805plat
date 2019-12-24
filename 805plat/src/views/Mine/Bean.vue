@@ -11,7 +11,7 @@
           <div class="num">99800</div>
         </div>
         <div class="btn-block">
-          <button class="btn-banner"></button>
+          <button class="btn-banner" @click="purchasehandle"></button>
         </div>
         <div class="tip">金豆在游戏中流通,可以通过充值和游戏内获得</div>
       </div>
@@ -23,7 +23,8 @@
             v-model="selectedLabel"
             show-slider
             inline
-            @change="changeHandler">
+            @change="changeHandler"
+          >
             <cube-tab v-for="(item) in tabs" :label="item.label" :key="item.label">
               <i slot="icon" class="iconfont" :class="item.icon"></i>
               <div class="tab-title" slot="default">{{item.label}}</div>
@@ -33,21 +34,24 @@
         <div class="list-container">
           <cube-tab-panels v-model="selectedLabel">
             <cube-tab-panel v-for="item in tabs" :label="item.label" :key="item.label">
-              <template v-if="item.list.length>0">
-                <ListItem
-                  v-for="recorditem in item.list"
-                  :key="recorditem.name"
-                  :title="recorditem.name"
-                  :time="recorditem.time"
-                  :num="recorditem.num"
-                ></ListItem>
-              </template>
+              <!-- <cube-scroll> -->
+                <template v-if="item.list.length>0">
+                  <ListItem
+                    v-for="recorditem in item.list"
+                    :key="recorditem.name"
+                    :title="recorditem.name"
+                    :time="recorditem.time"
+                    :num="recorditem.num"
+                  ></ListItem>
+                </template>
+              <!-- </cube-scroll> -->
               <Empty :tip="tip" v-else></Empty>
             </cube-tab-panel>
           </cube-tab-panels>
         </div>
       </div>
     </Xcont>
+    <Purchase :showpurchase="showpurchase"></Purchase>
   </div>
 </template>
 <script>
@@ -56,6 +60,8 @@ import Xcont from "@/components/layout/Xcontent.vue";
 import Stitle from "@/components/units/separate_title.vue";
 import ListItem from "@/components/units/list-item.vue";
 import Empty from "@/components/units/empty-block.vue";
+import Purchase from "@/components/units/purchase.vue";
+import { mapState } from "vuex";
 export default {
   name: "Bean",
   components: {
@@ -63,10 +69,13 @@ export default {
     Xcont,
     Stitle,
     ListItem,
-    Empty
+    Empty,
+    Purchase
   },
   data() {
     return {
+      incomepage: 1,
+      paypage: 1,
       selectedLabel: "收入",
       tabs: [
         {
@@ -78,30 +87,63 @@ export default {
           label: "支出",
           icon: "icon-zhichu",
           list: [
-            {
-              name: "官方赠送：测试123",
-              time: "2019-12-30 12:30:43",
-              num: "1000"
-            },
-            {
-              name: "官方赠送：测试1235",
-              time: "2019-12-30 12:30:43",
-              num: "2000"
-            },
-            {
-              name: "官方赠送：测试1234",
-              time: "2019-12-30 12:30:43",
-              num: "3000"
-            }
+            // {
+            //   name: "官方赠送：测试123",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "1000"
+            // },
+            // {
+            //   name: "官方赠送：测试1235",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "2000"
+            // },
+            // {
+            //   name: "官方赠送：测试1234",
+            //   time: "2019-12-30 12:30:43",
+            //   num: "3000"
+            // }
           ]
         }
       ],
-      tip:"最近暂无收入记录~"
+      tip: "最近暂无收入记录~"
     };
+  },
+  created() {
+    this.getincomelist();
+    this.getpaylist();
+  },
+  computed: {
+    ...mapState({
+      showpurchase: state => state.purchase.status
+    })
   },
   methods: {
     changeHandler(label) {
       this.tip = `最近暂无${label}记录~`;
+    },
+
+    purchasehandle() {
+      this.$store.dispatch("_showPurchase", true);
+    },
+
+    async getincomelist() {
+      let param = {
+        type: 2,
+        page: this.incomepage
+      };
+      let incomelist = await this.$get(this.$api.getbeanlist, param);
+      console.log(incomelist);
+      this.incomepage += 1;
+    },
+
+    async getpaylist() {
+      let param = {
+        type: 1,
+        page: this.paypage
+      };
+      let paylist = await this.$get(this.$api.getbeanlist, param);
+      console.log(paylist);
+      this.paypage += 1;
     }
   }
 };
