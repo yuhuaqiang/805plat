@@ -27,3 +27,20 @@ html, body {
         margin-bottom: $padding-m;
     }
 }
+/*单行文本省略*/
+.ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+}
+/*清除浮动*/
+.clearfix:before,.clearfix:after {
+    display: table;
+    content: "";    /*不用有内容也可以*/
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}

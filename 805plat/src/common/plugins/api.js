@@ -9,6 +9,8 @@ const api = {
     address:baseUrl+"/gameuser/address",//修改地址
     finishsend:baseUrl+"/gameuser/finishsend",//修改地址
     bindaccount:baseUrl+"/gameuser/bindaccount",//绑定手机
+    couplist:baseUrl+"/gameshop/couplist",//绑定手机
+
 }
 
 export default api

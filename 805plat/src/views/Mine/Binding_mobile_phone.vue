@@ -49,7 +49,7 @@
 								<span>+86</span>
 							</div>
 							<div class="set_c">
-								<input type="text" name="" v-model="phone" placeholder="请输入手机号码" maxlength="11">
+								<input type="number" v-model="phone" placeholder="请输入手机号码" maxlength="11">
 							</div>
 						</div>
 						<div class="set_child">
@@ -235,6 +235,7 @@ export default {
 				font-size: $size-xs;
 				color: $color-deep;
 				margin-right: 20px;
+				white-space: normal;
 			}
 			.set_c{
 				flex: 1;
@@ -246,7 +247,7 @@ export default {
 				}
 			}
 			.set_r{
-				margin-left: 15px;
+				// margin-left: 15px;
 				button{
 					font-size: $size-xs;
 				}
