@@ -11,6 +11,7 @@ const api = {
     bindaccount:baseUrl+"/gameuser/bindaccount",//绑定手机
     getbeanlist:baseUrl+"/gameuser/Ybwaterlist",//获取金豆记录
     getpointlist:baseUrl+"/gameuser/ticketRecord",//获取积分记录
+    getpayitem:baseUrl+"/gamepay/payitem",//获取充值列表
 }
 
 export default api

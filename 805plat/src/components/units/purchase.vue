@@ -6,8 +6,8 @@
         <i class="iconfont icon-close"></i>
       </div>
       <div class="top-block">
-        <div class="block-l">我的金豆:1311</div>
-        <div class="block-r">每日充值限额：1000元</div>
+        <div class="block-l">我的金豆:{{payitem.ingot}}</div>
+        <div class="block-r">每日充值限额:{{payitem.pay_max}}元</div>
       </div>
       <div class="marquee-block">
         <div class="icon-block">
@@ -18,60 +18,11 @@
         </div>
       </div>
       <div class="list-block">
-        <div class="purchase-item">
+        <div class="purchase-item" v-for="item in payitem.list" :key="item.id">
           <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
+          <div class="item-bean">{{item.ingot | formatNumberRgx}}金豆</div>
           <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
-          </div>
-        </div>
-        <div class="purchase-item">
-          <div class="item-icon"></div>
-          <div class="item-bean">312000000金豆</div>
-          <div class="item-amount">
-            <button class="btn-purchase">￥321</button>
+            <button class="btn-purchase">￥{{item.money}}</button>
           </div>
         </div>
       </div>
@@ -82,6 +33,14 @@
 import { mapState } from "vuex";
 export default {
   props: {},
+  data() {
+    return {
+      payitem: []
+    };
+  },
+  created() {
+    this.getpayitem();
+  },
   computed: {
     ...mapState({
       showpurchase: state => state.purchase.status
@@ -90,6 +49,10 @@ export default {
   methods: {
     purchaseclose() {
       this.$store.dispatch("_showPurchase", false);
+    },
+    async getpayitem() {
+      let payitemlist = await this.$get(this.$api.getpayitem, {});
+      this.payitem = payitemlist;
     }
   }
 };
@@ -102,6 +65,7 @@ export default {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 
   .modal-content {
     width: 620px;
@@ -145,9 +109,10 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 0 $padding-s;
+      padding: 0 0;
       margin-top: 32px;
       font-size: $size-s;
+      white-space: nowrap;
 
       .block-l {
         color: #9a3600;
@@ -218,32 +183,32 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size $size-s;
+        font-size: $size-s;
 
         .item-icon {
           width: 60px;
-          height 60px;
-          background url('assets/images/ingot.png') no-repeat;
-          background-size 100%;
+          height: 60px;
+          background: url('assets/images/ingot.png') no-repeat;
+          background-size: 100%;
         }
 
         .item-bean {
           flex: 1;
-          color #9a3600;
-          padding 0 $padding-l;
+          color: #9a3600;
+          padding: 0 $padding-l;
         }
 
         .item-amount {
           width: 100px;
 
-          .btn-purchase{
-            width:100%;
-            height 40px;
-            line-height 40px;
-            background $color-regular-blue;
-            border-radius 20px;
-            color #fff;
-            border none
+          .btn-purchase {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: $color-regular-blue;
+            border-radius: 20px;
+            color: #fff;
+            border: none;
           }
         }
       }

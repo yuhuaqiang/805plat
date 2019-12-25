@@ -1,6 +1,6 @@
 import Mine from '@/views/Mine/Home.vue'
 import Setting from '@/views/Mine/Setting.vue'
-import Purchase from '@/views/Mine/Purchase.vue'
+import Purchase from '@/views/Mine/PurchaseList.vue'
 import Coupon from '@/views/Mine/Coupon.vue'
 import BindingPhone from '@/views/Mine/Binding_mobile_phone.vue'
 import Address from '@/views/Mine/Address.vue'
@@ -26,7 +26,7 @@ export default [
     },
 },
 {
-    path: '/mine/Purchase',
+    path: '/mine/PurchaseList',
     name: 'Purchase',
     component: Purchase,
     meta: {

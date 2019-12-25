@@ -8,7 +8,7 @@
             我的金豆
             <i class="iconfont icon-ingot"></i>
           </div>
-          <div class="num">99800</div>
+          <div class="num">{{baseinfo.ingot}}</div>
         </div>
         <div class="btn-block">
           <button class="btn-banner" @click="purchasehandle"></button>
@@ -34,18 +34,26 @@
         <div class="list-container">
           <cube-tab-panels v-model="selectedLabel">
             <cube-tab-panel v-for="item in tabs" :label="item.label" :key="item.label">
-              <!-- <cube-scroll> -->
-                <template v-if="item.list.length>0">
-                  <ListItem
-                    v-for="recorditem in item.list"
-                    :key="recorditem.name"
-                    :title="recorditem.name"
-                    :time="recorditem.time"
-                    :num="recorditem.num"
-                  ></ListItem>
-                </template>
-              <!-- </cube-scroll> -->
-              <Empty :tip="tip" v-else></Empty>
+              <div class="scroll-list-wrap">
+                <cube-scroll
+                  v-if="item.list.length>0"
+                  :ref="item.tabname"
+                  @pulling-up="onPullingUp"
+                  :data="item.list"
+                  :options="options"
+                >
+                  <template>
+                    <ListItem
+                      v-for="(recorditem,index) in item.list"
+                      :key="index"
+                      :title="recorditem.game_name"
+                      :time="recorditem.add_time"
+                      :num="recorditem.ingot"
+                    ></ListItem>
+                  </template>
+                </cube-scroll>
+                <Empty :tip="tip" v-else></Empty>
+              </div>
             </cube-tab-panel>
           </cube-tab-panels>
         </div>
@@ -79,42 +87,41 @@ export default {
       selectedLabel: "收入",
       tabs: [
         {
+          tabname:"income",
           label: "收入",
           icon: "icon-shouru",
           list: []
         },
         {
+          tabname:"pay",
           label: "支出",
           icon: "icon-zhichu",
-          list: [
-            // {
-            //   name: "官方赠送：测试123",
-            //   time: "2019-12-30 12:30:43",
-            //   num: "1000"
-            // },
-            // {
-            //   name: "官方赠送：测试1235",
-            //   time: "2019-12-30 12:30:43",
-            //   num: "2000"
-            // },
-            // {
-            //   name: "官方赠送：测试1234",
-            //   time: "2019-12-30 12:30:43",
-            //   num: "3000"
-            // }
-          ]
+          list: []
         }
       ],
-      tip: "最近暂无收入记录~"
+      tip: "最近暂无收入记录~",
+      options: {
+        pullUpLoad: {
+          threshold: 60,
+          txt: {
+            more: "获取更多记录",
+            nomore: "没有更多记录"
+          }
+        },
+        scrollbar: true
+      }
     };
   },
-  created() {
-    this.getincomelist();
-    this.getpaylist();
+  async created() {
+    let incomelist = await this.getincomelist();
+    let paylist = await this.getpaylist();
+    this.tabs[0].list = incomelist.list;
+    this.tabs[1].list = paylist.list;
   },
   computed: {
     ...mapState({
-      showpurchase: state => state.purchase.status
+      showpurchase: state => state.purchase.status,
+      baseinfo: state => state.baseinfo.baseinfo
     })
   },
   methods: {
@@ -128,22 +135,41 @@ export default {
 
     async getincomelist() {
       let param = {
-        type: 2,
+        type: 1,
         page: this.incomepage
       };
       let incomelist = await this.$get(this.$api.getbeanlist, param);
-      console.log(incomelist);
       this.incomepage += 1;
+      return incomelist;
     },
 
     async getpaylist() {
       let param = {
-        type: 1,
+        type: 2,
         page: this.paypage
       };
       let paylist = await this.$get(this.$api.getbeanlist, param);
-      console.log(paylist);
+
       this.paypage += 1;
+      return paylist;
+    },
+
+    async onPullingUp() {
+      if (this.selectedLabel == "收入") {
+        let incomelist = await this.getincomelist();
+        if (incomelist.list) {
+          this.tabs[0].list = this.tabs[0].list.concat(incomelist.list);
+        } else {
+          this.$refs.income.forceUpdate();
+        }
+      } else {
+        let paylist = await this.getpaylist();
+        if (paylist.list) {
+          this.tabs[1].list = this.tabs[1].list.concat(paylist.list);
+        } else {
+          this.$refs.pay.forceUpdate();
+        }
+      }
     }
   }
 };
@@ -206,5 +232,12 @@ export default {
   width: calc(100% - 120px);
   margin: 0 auto;
   padding-bottom: $padding-l;
+  height: calc(100vh - 640px);
+  overflow-y: hidden;
+
+  .scroll-list-wrap {
+    height: calc(100vh - 88.889vw);
+    overflow: hidden;
+  }
 }
 </style>
