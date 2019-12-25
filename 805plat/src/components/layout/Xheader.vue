@@ -72,6 +72,7 @@ header {
   font-size:$size-m;
   top: 0;
   color: #fff;
+  z-index:999;
 
   .left, .right {
     width: 90px;

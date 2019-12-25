@@ -26,3 +26,10 @@ export function getCookie(c_name){
 export function delCookie(c_name) {
     setCookie(c_name, "", -1)
 };
+
+//数字加千分号
+export function formatNumberRgx(num) {
+    var parts = num.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}  
