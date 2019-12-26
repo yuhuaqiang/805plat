@@ -80,7 +80,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
 import { mapState } from "vuex";

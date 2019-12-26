@@ -13,36 +13,40 @@
         </div>
         <div class="list-container">
           <cube-tab-panels v-model="selectedLabel">
-            <cube-tab-panel v-for="item in tabs" :label="item.label" :key="item.label">
-              <template v-if="item.list.coupons_list">
-                <dl>
+            <cube-tab-panel v-for="(item,index) in tabs" :label="item.label" :key="item.label">
+              <template v-if="item.list.length>0">
+                <dl v-for="store in item.list" :key="store.company_id">
                   <dt>
-                    <div class="company-name">{{item.list.company_name}}</div>
+                    <div class="company-name">{{store.company_name}}</div>
                     <div class="company-address">
                       <span class="iconfont icon-location"></span>
-                      {{item.list.address}}
+                      {{store.address}}
                     </div>
                   </dt>
-                  <dd v-for="coupon in item.list.coupons_list" :key="coupon.coupid">
+                  <dd v-for="coupon in store.coups" :key="coupon.sn" :class="index==0?'':'gray'">
                     <div class="coupon-l">
                       <img :src="coupon.cover" />
                     </div>
                     <div class="coupon-c">
-                      <div class="title">{{item.list.company_name}}</div>
-                      <div class="pro">{{coupon.name}}</div>
+                      <div class="title">{{store.company_name}}</div>
+                      <div class="pro">{{coupon.coup_name}}</div>
                       <div class="expired">有效期：{{coupon.expired}}</div>
                     </div>
                     <div class="coupon-r">
-                      <div class="btn-coupon">立即使用</div>
+                      <template v-if="index==0">
+                        <div
+                          class="btn-coupon"
+                          @click="gouse(coupon.sn,store.company_name,coupon.coup_name)"
+                        >{{index==0?'立即使用':index==1?'已使用':'已过期'}}</div>
+                      </template>
+                      <template v-else>
+                        <div class="btn-coupon">{{index==0?'立即使用':index==1?'已使用':'已过期'}}</div>
+                      </template>
                     </div>
                   </dd>
                 </dl>
               </template>
               <Empty icon="icon-coupon-text" tip="亲，暂无优惠券哦~" v-else></Empty>
-              <!-- <div class="empty-block">
-                <span class="iconfont icon-coupon-text"></span>
-                <span></span>
-              </div> -->
             </cube-tab-panel>
           </cube-tab-panels>
         </div>
@@ -67,46 +71,7 @@ export default {
       tabs: [
         {
           label: "可使用",
-          list: {
-            company_id: "5",
-            location: "",
-            address: "上海市共和新路1928号大宁福朋喜来登酒店1楼",
-            pic: "https://res-test.805.com/upload/d/1911/25/5ddbb4be7b3dc.png",
-            company_name: "大宁福朋喜来登酒店宜客乐The Eatery",
-            company_info: "",
-            coupons_list: [
-              {
-                qdcompany_id: "5",
-                ditch_num: "10001",
-                name: "满500减150",
-                cover:
-                  "https://res-test.805.com/upload/d/1911/25/5ddbb8e293279.png",
-                use_num: "100",
-                price: "10.00",
-                total_stock: "1008",
-                discount: "0",
-                coupid: "2",
-                sn: "shiwan10001200003",
-                get_time: "1576830228",
-                expired: "1577435028"
-              },
-              {
-                qdcompany_id: "5",
-                ditch_num: "10001",
-                name: "满200元减50元",
-                cover:
-                  "https://res-test.805.com/upload/d/1911/25/5ddbb8bf051e0.png",
-                use_num: "100",
-                price: "5.00",
-                total_stock: "1000",
-                discount: "0",
-                coupid: "1",
-                sn: "shiwan10001000009",
-                get_time: "1576830226",
-                expired: "1577435026"
-              }
-            ]
-          }
+          list: {}
         },
         {
           label: "已使用",
@@ -118,27 +83,40 @@ export default {
         }
       ]
     };
+  },
+  async created() {
+    let usecoupon = await this.getcouponlist("1");
+    let usedcoupon = await this.getcouponlist("2");
+    let timeoutcoupon = await this.getcouponlist("3");
+    this.tabs[0].list = usecoupon.list;
+    this.tabs[1].list = usedcoupon.list;
+    this.tabs[2].list = timeoutcoupon.list;
+  },
+  methods: {
+    async getcouponlist(status) {
+      let coupons = await this.$get(this.$api.getmycoupon, { status });
+      return coupons;
+    },
+    gouse(sn,sname,cname) {
+      this.$router.push({
+        name: "Couponcode",
+        params: {
+          sn: sn,
+          sname:sname,
+          cname:cname
+        }
+      });
+    }
   }
 };
 </script>
 <style lang="stylus" scoped>
+.container {
+}
+
 .list-container {
   height: calc(100% - 80px);
-
-//   .empty-block {
-//     height: 100%;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     color: $color-shallow;
-
-//     .iconfont {
-//       font-size: 140px;
-//       margin-bottom: $padding-s;
-//     }
-//   }
+  overflow-y: auto;
 
   dl {
     width: 100%;
@@ -171,6 +149,7 @@ export default {
       height: 210px;
       padding: $padding-m $padding-m $padding-m $padding-l;
       display: flex;
+      margin-bottom: 32px;
 
       .coupon-l {
         width: 243px;
@@ -196,8 +175,8 @@ export default {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          height 40px;
-          line-height 40px;
+          height: 40px;
+          line-height: 40px;
         }
 
         .pro {
@@ -233,6 +212,15 @@ export default {
         .btn-coupon {
           width: 80px;
         }
+      }
+    }
+
+    dd.gray {
+      filter: grayscale(100%);
+
+      .btn-coupon {
+        width: 100%;
+        text-align: center;
       }
     }
   }
