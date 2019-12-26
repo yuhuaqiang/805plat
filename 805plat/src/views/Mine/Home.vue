@@ -96,11 +96,13 @@ export default {
     };
   },
   created() {
+    console.log(this.token);
     this.getuserinfo();
   },
   computed: {
     ...mapState({
-      baseinfo: state => state.baseinfo.baseinfo
+      baseinfo: state => state.baseinfo.baseinfo,
+      token: state => state.user.token
     })
   },
   methods: {
