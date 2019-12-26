@@ -9,6 +9,7 @@ const api = {
     address:baseUrl+"/gameuser/address",//修改地址
     finishsend:baseUrl+"/gameuser/finishsend",//修改地址
     bindaccount:baseUrl+"/gameuser/bindaccount",//绑定手机
+    couplist:baseUrl+"/gameshop/couplist",//获取领奖列表
     getbeanlist:baseUrl+"/gameuser/Ybwaterlist",//获取金豆记录
     getpointlist:baseUrl+"/gameuser/ticketRecord",//获取积分记录
     getpayitem:baseUrl+"/gamepay/payitem",//获取充值列表

@@ -62,7 +62,7 @@ export default {
 header {
   width: 100%;
   height: $height-header;
-  line-height: $height-header;
+  // line-height: $height-header;
   background: #F82A31;
   display: flex;
   justify-content: space-between;
