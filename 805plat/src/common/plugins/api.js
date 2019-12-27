@@ -16,7 +16,9 @@ const api = {
     getwxconfig:baseUrl+"/weixin/share",//获取微信jssdk config
     createorder:baseUrl+"/gamepay/createorder",
     getpayconfig:baseUrl+"/gamepay/payup",
-    getmycoupon:baseUrl+"/gameuser/mymchcoupons"
+    getmycoupon:baseUrl+"/gameuser/mymchcoupons",
+    getpurchaselist:baseUrl+"/gameuser/paywaterlist",
+    getpurchasedetail:baseUrl+"/gameuser/paywaterinfo",
 }
 
 export default api

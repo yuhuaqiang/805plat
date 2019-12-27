@@ -10,7 +10,7 @@ Vue.use(Vuex)
 const vuexLocal = new VuexPersistence({
 	storage: window.localStorage,
 	// 要持久化的模块列表。
-	modules: ['user'],
+	modules: ['user','baseinfo'],
 })
 
 export default new Vuex.Store({

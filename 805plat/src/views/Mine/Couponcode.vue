@@ -36,7 +36,7 @@ export default {
     };
   },
   created() {
-    if (this.$route.params.sn) {
+    //if (this.$route.params.sn) {
       let { sn, sname, cname } = this.$route.params;
       let coupon = {
         sn,
@@ -48,13 +48,13 @@ export default {
       this.cname = cname;
       localStorage.setItem("coupon", JSON.stringify(coupon));
       this.createqrcode(sn);
-    } else {
-      let { sn, sname, cname } = JSON.parse(localStorage.getItem("coupon"));
-      this.sn = sn;
-      this.sname = sname;
-      this.cname = cname;
-      this.createqrcode(sn);
-    }
+    // } else {
+    //   let { sn, sname, cname } = JSON.parse(localStorage.getItem("coupon"));
+    //   this.sn = sn;
+    //   this.sname = sname;
+    //   this.cname = cname;
+    //   this.createqrcode(sn);
+    // }
   },
   computed: {},
   methods: {
