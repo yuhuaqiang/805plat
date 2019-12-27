@@ -13,6 +13,13 @@ const api = {
     getbeanlist:baseUrl+"/gameuser/Ybwaterlist",//获取金豆记录
     getpointlist:baseUrl+"/gameuser/ticketRecord",//获取积分记录
     getpayitem:baseUrl+"/gamepay/payitem",//获取充值列表
+    receivecoup:baseUrl+"/gameshop/receivecoup",//优惠券领取
+    cates:baseUrl+"/gameshop/cates",//获取商品分类
+    list:baseUrl+"/gameshop/list",//获取商品列表
+    goodsdetail:baseUrl+"/gameshop/detail",//获取商品详情
+    convertgoods:baseUrl+"/gameshop/convertgoods",//商品兑换
+    convertgoodsExchange:baseUrl+"/gameshop/convertgoods2",//商品兑换
+    listhot:baseUrl+"/gameshop/listhot",//热门商品
     getwxconfig:baseUrl+"/weixin/share",//获取微信jssdk config
     createorder:baseUrl+"/gamepay/createorder",
     getpayconfig:baseUrl+"/gamepay/payup",
