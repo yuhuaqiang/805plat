@@ -8,7 +8,7 @@
             我的积分
             <i class="iconfont icon-diamond"></i>
           </div>
-          <div class="num">{{baseinfo.ticket}}</div>
+          <div class="num">{{baseinfo.ticket|formatNumberRgx}}</div>
         </div>
         <div class="btn-block">
           <button class="btn-banner"></button>

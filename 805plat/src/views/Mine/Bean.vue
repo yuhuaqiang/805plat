@@ -8,7 +8,7 @@
             我的金豆
             <i class="iconfont icon-ingot"></i>
           </div>
-          <div class="num">{{baseinfo.ingot}}</div>
+          <div class="num">{{baseinfo.ingot|formatNumberRgx}}</div>
         </div>
         <div class="btn-block">
           <button class="btn-banner" @click="purchasehandle"></button>

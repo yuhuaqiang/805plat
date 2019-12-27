@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="item-r">
-        <slot name="num">{{num}}</slot>
+        <slot name="num">{{num|formatNumberRgx}}</slot>
       </div>
     </div>
   </div>

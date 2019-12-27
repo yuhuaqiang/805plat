@@ -29,7 +29,7 @@
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">{{userinfo.ingot}}</div>
+              <div class="num">{{userinfo.ingot|formatNumberRgx}}</div>
             </div>
             <div class="item" @click="navigate('/mine/point')">
               <div class="title">
@@ -39,7 +39,7 @@
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">{{userinfo.ticket}}</div>
+              <div class="num">{{userinfo.ticket|formatNumberRgx}}</div>
             </div>
           </div>
         </div>
@@ -95,7 +95,6 @@ export default {
     };
   },
   created() {
-    console.log(this.token);
     this.getuserinfo();
   },
   computed: {

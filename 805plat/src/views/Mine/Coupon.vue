@@ -30,7 +30,7 @@
                     <div class="coupon-c">
                       <div class="title">{{store.company_name}}</div>
                       <div class="pro">{{coupon.coup_name}}</div>
-                      <div class="expired">有效期：{{coupon.expired}}</div>
+                      <div class="expired">有效期：{{coupon.expired|timestampToDate}}</div>
                     </div>
                     <div class="coupon-r">
                       <template v-if="index==0">
@@ -97,13 +97,13 @@ export default {
       let coupons = await this.$get(this.$api.getmycoupon, { status });
       return coupons;
     },
-    gouse(sn,sname,cname) {
+    gouse(sn, sname, cname) {
       this.$router.push({
         name: "Couponcode",
         params: {
           sn: sn,
-          sname:sname,
-          cname:cname
+          sname: sname,
+          cname: cname
         }
       });
     }
