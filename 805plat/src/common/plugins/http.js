@@ -8,10 +8,7 @@ import qs from 'qs'
 const instance = axios.create({
 })
 
-let token = store.state.user.token;
-if (token) {
-    instance.defaults.headers.common['token'] = token;
-}
+
 
 instance.interceptors.response.use(response => {
 
@@ -45,6 +42,7 @@ instance.interceptors.response.use(response => {
 })
 
 export const post = (api, data) => {
+    addheadertoken();    
     if (!(data instanceof FormData)) {
         data = qs.stringify(data)
     }
@@ -58,14 +56,24 @@ export const post = (api, data) => {
 }
 
 export const get = (api, data) => {
-   // data = addCurrentUserParam(data);
+    addheadertoken();
+    // data = addCurrentUserParam(data);
     return new Promise((resolve, reject) => {
-        instance.get(api, {params:data}).then(response => {
+        instance.get(api, { params: data }).then(response => {
             resolve(response)
         }).catch(error => {
             reject(error)
         })
     })
+}
+
+const addheadertoken=()=>{    
+    if(!instance.defaults.headers.common['token']){        
+        let token = store.state.user.token;
+        if (token) {
+            instance.defaults.headers.common['token'] = token;
+        }
+    }
 }
 
 const addCurrentUserParam = (data = {}) => {

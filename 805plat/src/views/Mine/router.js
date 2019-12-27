@@ -7,6 +7,7 @@ import Address from '@/views/Mine/Address.vue'
 import Realname from '@/views/Mine/Realname.vue'
 import Bean from '@/views/Mine/Bean.vue'
 import Point from '@/views/Mine/Point.vue'
+import Couponcode from '@/views/Mine/Couponcode.vue'
 export default [
 {
     path: '/',
@@ -76,6 +77,13 @@ export default [
     path: '/mine/Point',
     name: 'Point',
     component: Point,
+    meta: {
+    },
+},
+{
+    path: '/mine/Couponcode',
+    name: 'Couponcode',
+    component: Couponcode,
     meta: {
     },
 },

@@ -1,6 +1,6 @@
 //export const baseUrl = 'https://m-test.dev805.com'//内网测试
 //export const baseUrl = 'https://m-test.805.com'//外网测试
-// export const baseUrl = 'https://m.805.com'//正式
+//export const baseUrl = 'https://m.805.com'//正式
 export const baseUrl=""
 const api = {
     gettoken:baseUrl+"/gamelogin/wechat",
@@ -20,6 +20,10 @@ const api = {
     convertgoods:baseUrl+"/gameshop/convertgoods",//商品兑换
     convertgoodsExchange:baseUrl+"/gameshop/convertgoods2",//商品兑换
     listhot:baseUrl+"/gameshop/listhot",//热门商品
+    getwxconfig:baseUrl+"/weixin/share",//获取微信jssdk config
+    createorder:baseUrl+"/gamepay/createorder",
+    getpayconfig:baseUrl+"/gamepay/payup",
+    getmycoupon:baseUrl+"/gameuser/mymchcoupons"
 }
 
 export default api

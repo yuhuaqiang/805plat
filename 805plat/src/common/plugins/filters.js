@@ -1,3 +1,4 @@
+import moment from 'moment'
 export function fmoney(num) {
     num=num*1;
     let numstr = num.toFixed(2);
@@ -29,7 +30,29 @@ export function delCookie(c_name) {
 
 //数字加千分号
 export function formatNumberRgx(num) {
-    var parts = num.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-}  
+    if(num){
+        var parts = num.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
+   else{
+       return 0.00;
+   }
+} 
+
+//时间戳转日期
+export function timestampToDate(timestamp){
+    timestamp = timestamp.toString();
+    if (timestamp.length === 10) {
+        timestamp += "000"
+    }
+    let dateobj =new Date(parseInt(timestamp));
+    let datestr= timeFormat(dateobj,"YYYY-MM-DD");
+    return datestr;
+}
+
+//时间格式转换
+export function timeFormat(value, format, src = 'YYYY-MM-DD') {   
+     
+    return moment(value, src).format(format)
+}

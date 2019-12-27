@@ -29,7 +29,7 @@
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">{{userinfo.ingot}}</div>
+              <div class="num">{{userinfo.ingot|formatNumberRgx}}</div>
             </div>
             <div class="item" @click="navigate('/mine/point')">
               <div class="title">
@@ -39,7 +39,7 @@
                 </span>
                 <i class="iconfont icon-arrow-right"></i>
               </div>
-              <div class="num">{{userinfo.ticket}}</div>
+              <div class="num">{{userinfo.ticket|formatNumberRgx}}</div>
             </div>
           </div>
         </div>
@@ -80,7 +80,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
 import { mapState } from "vuex";
@@ -100,7 +99,8 @@ export default {
   },
   computed: {
     ...mapState({
-      baseinfo: state => state.baseinfo.baseinfo
+      baseinfo: state => state.baseinfo.baseinfo,
+      token: state => state.user.token
     })
   },
   methods: {

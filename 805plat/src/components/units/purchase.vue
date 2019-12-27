@@ -21,7 +21,7 @@
         <div class="purchase-item" v-for="item in payitem.list" :key="item.id">
           <div class="item-icon"></div>
           <div class="item-bean">{{item.ingot | formatNumberRgx}}金豆</div>
-          <div class="item-amount">
+          <div class="item-amount" @click="createorder(item.id)">
             <button class="btn-purchase">￥{{item.money}}</button>
           </div>
         </div>
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import wx from "weixin-js-sdk";
 export default {
   props: {},
   data() {
@@ -40,6 +41,7 @@ export default {
   },
   created() {
     this.getpayitem();
+    this.wxstart();
   },
   computed: {
     ...mapState({
@@ -53,6 +55,59 @@ export default {
     async getpayitem() {
       let payitemlist = await this.$get(this.$api.getpayitem, {});
       this.payitem = payitemlist;
+    },
+    async wxstart() {
+      let config = await this.$get(this.$api.getwxconfig, {
+        url: window.location.href
+      });
+      wx.config({
+        beta: true,
+        debug: false,
+        appId: config.appid,
+        timestamp: config.timestamp,
+        nonceStr: config.nonceStr,
+        signature: config.signature,
+        jsApiList: ["getBrandWCPayRequest"]
+      });
+    },
+    async createorder(product_id) {
+      let param = {
+        pay_num: 1,
+        pay_type: 3,
+        product_id,
+        product_type: 1
+      };
+      let order = await this.$post(this.$api.createorder, param);
+      let orderconfig = await this.$post(this.$api.getpayconfig, {
+        order_no: order.orderno
+      });
+      if (orderconfig.data.jsApiParameters) {
+        orderconfig = orderconfig.data.jsApiParameters;
+      }else{
+        this.toast = this.$createToast({
+			        txt: '订单创建失败',
+			        type: 'txt'
+			    })
+			    this.toast.show();
+      }
+
+      wx.invoke(
+        "getBrandWCPayRequest",
+        {
+          appId: orderconfig.appId, //公众号名称，由商户传入
+          timeStamp: orderconfig.timeStamp, //时间戳，自1970年以来的秒数
+          nonceStr: orderconfig.nonceStr, //随机串
+          package: orderconfig.packAge,
+          signType: "MD5", //微信签名方式
+          paySign: orderconfig.signType //微信签名
+        },
+        function(res) {
+          var a = JSON.stringify(res);
+          if (res.err_msg == "get_brand_wcpay_request:ok") {
+          } else {
+          } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+        }
+      );
     }
   }
 };

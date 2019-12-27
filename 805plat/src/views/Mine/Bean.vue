@@ -8,7 +8,7 @@
             我的金豆
             <i class="iconfont icon-ingot"></i>
           </div>
-          <div class="num">{{baseinfo.ingot}}</div>
+          <div class="num">{{baseinfo.ingot|formatNumberRgx}}</div>
         </div>
         <div class="btn-block">
           <button class="btn-banner" @click="purchasehandle"></button>
@@ -34,9 +34,8 @@
         <div class="list-container">
           <cube-tab-panels v-model="selectedLabel">
             <cube-tab-panel v-for="item in tabs" :label="item.label" :key="item.label">
-              <div class="scroll-list-wrap">
+              <div class="scroll-list-wrap" v-if="item.list.length>0">
                 <cube-scroll
-                  v-if="item.list.length>0"
                   :ref="item.tabname"
                   @pulling-up="onPullingUp"
                   :data="item.list"
@@ -52,8 +51,8 @@
                     ></ListItem>
                   </template>
                 </cube-scroll>
-                <Empty :tip="tip" v-else></Empty>
               </div>
+              <Empty :tip="tip" v-else></Empty>
             </cube-tab-panel>
           </cube-tab-panels>
         </div>
@@ -87,13 +86,13 @@ export default {
       selectedLabel: "收入",
       tabs: [
         {
-          tabname:"income",
+          tabname: "income",
           label: "收入",
           icon: "icon-shouru",
           list: []
         },
         {
-          tabname:"pay",
+          tabname: "pay",
           label: "支出",
           icon: "icon-zhichu",
           list: []
@@ -101,12 +100,14 @@ export default {
       ],
       tip: "最近暂无收入记录~",
       options: {
+        pullDownRefresh: false,
         pullUpLoad: {
           threshold: 60,
-          txt: {
-            more: "获取更多记录",
-            nomore: "没有更多记录"
-          }
+          // txt: {
+          //   more: "获取更多记录...",
+          //   nomore: "没有更多记录..."
+          // },
+          visible: true
         },
         scrollbar: true
       }
@@ -157,17 +158,25 @@ export default {
     async onPullingUp() {
       if (this.selectedLabel == "收入") {
         let incomelist = await this.getincomelist();
-        if (incomelist.list) {
+        if (incomelist.list.length > 0) {
           this.tabs[0].list = this.tabs[0].list.concat(incomelist.list);
+          // if(incomelist.list.length<20){
+          //   this.$refs.income[0].forceUpdate(false);
+          // }
         } else {
-          this.$refs.income.forceUpdate();
+          //console.log(this.$refs.income);
+
+          this.$refs.income[0].forceUpdate(false);
         }
       } else {
         let paylist = await this.getpaylist();
-        if (paylist.list) {
+        if (paylist.list.length > 0) {
           this.tabs[1].list = this.tabs[1].list.concat(paylist.list);
+          //  if(incomelist.list.length<20){
+          //   this.$refs.pay[0].forceUpdate(false);
+          // }
         } else {
-          this.$refs.pay.forceUpdate();
+          this.$refs.pay[0].forceUpdate(false);
         }
       }
     }
