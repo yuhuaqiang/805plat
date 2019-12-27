@@ -4,69 +4,71 @@
 	 <Xcont :header="true">
 	 	<div class="detail_content">
 	 		<div class="info">
-	 			<div class="info_l"></div>
+	 			<div class="info_l">
+	 				<img :src="shop_detail.small_pic">
+	 			</div>
 	 			<div class="info_r">
-	 				<p class="title ellipsis">沸乐宝火锅(重庆万达广场)</p>
+	 				<p class="title ellipsis">{{shop_detail.company_name}}</p>
         			<div class="shop_address">
         				<i></i>
-        				<span class="ellipsis">重庆市XXX路568号 3F</span>
+        				<span class="ellipsis">{{shop_detail.address}}</span>
         			</div>
         			<div class="introduce">
-        				<div class="box">"主售火锅,小吃,烧烤等"</div>
+        				<div class="box">{{shop_detail.second_info ? shop_detail.second_info : `暂无主打菜品`}}</div>
         			</div>
         			<div class="desc">
-        				<span>这里是店铺的介绍,这里是店铺的介绍,这里是店铺的介绍,这里是店铺的介绍,这里是店铺的介绍</span>
+        				<span>{{shop_detail.company_info}}</span>
         			</div>
 	 			</div>
 	 		</div>
-	 		<section v-for="item in 2">
-		 		<div class="shop_coupon" @click="show = !show">
+	 		<section v-for="(item,index) in shop_detail.coups" :key="item.id">
+		 		<div class="shop_coupon">
 		 			<div class="coupon_l">
-		 				<p>￥<span>13</span></p>
+		 				<p>￥<span>{{Number(item.price)}}</span></p>
 		 			</div>
-		 			<div class="coupon_c">
+		 			<div class="coupon_c" @click="showDetail(item)">
 		 				<div class="time">
 		 					<span>使用期限</span>
-		 					<span>7天</span>
+		 					<span>{{item.day}}天</span>
 		 				</div>
 		 				<div class="conditions">
-		 					<span>无门槛</span>
+		 					<span>{{item.full == 0 ? '无门槛':`满${item.full}可用`}}</span>
 		 				</div>
 		 				<div class="pack_up">
-		 					<span>点击收起</span>
-		 					<i class="up"></i>
+		 					<span>{{item.show? '点击收起':'点击展开'}}</span>
+		 					<i :class="[item.show ? 'up':'down']"></i>
 		 				</div>
 		 			</div>
-		 			<div class="coupon_r">
+		 			<div class="coupon_r" @click="getCoupon(item.id)">
 		 				<div class="diamond">
 		 					<i></i>
-		 					<span>9999</span>
+		 					<span>{{item.use_num}}</span>
 		 				</div>
 		 				<div class="exchange">立即兑换</div>
 		 			</div>
 		 		</div>
 		 		<transition name="" enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
-		 		<div class="coupon_detail" v-if="show">
+		 		<div class="coupon_detail" v-if="item.show">
 		 			<div class="instructions">
 		 				<span>兑换说明</span>
-		 				<span>已兑 111</span>
-		 				<span>剩余 888</span>
+		 				<span>已兑 {{item.total - item.valid_num}}</span>
+		 				<span>剩余 {{item.valid_num}}</span>
 		 			</div>
 		 			<div class="cond_detail clearfix">
 		 				<div class="cond_l">有效期:</div>
-		 				<div class="cond_r">2019年12月23日至2020年1月1日</div>
+		 				<div class="cond_r">{{item.day}}天</div>
 		 			</div>
 		 			<div class="cond_detail clearfix">
 		 				<div class="cond_l">使用时间:</div>
-		 				<div class="cond_r">2019年12月23日至2020年1月1日</div>
+		 				<div class="cond_r">{{item.use_date}}</div>
 		 			</div>
 		 			<div class="cond_detail clearfix">
 		 				<div class="cond_l">使用范围:</div>
-		 				<div class="cond_r">2019年12月23日至2020年1月1日</div>
+		 				<div class="cond_r">{{item.use_range}}</div>
 		 			</div>
 		 			<div class="cond_detail clearfix">
 		 				<div class="cond_l">使用规则:</div>
-		 				<div class="cond_r">2019年12月23日至2020年1月1日</div>
+		 				<div class="cond_r">{{item.use_rule}}</div>
 		 			</div>
 		 		</div>
 		 		</transition>
@@ -88,7 +90,8 @@ export default {
   data() {
 	return {
 	  name: "",
-	  shopId:'',
+	  shopId:'',//店铺id
+	  shop_detail:"",//店铺详情
 	  show: false
 	};
   },
@@ -103,8 +106,30 @@ export default {
         });
         if (res && res._status == '200') {
         	// 计算优惠券使用数量
-            
-            //this.shopList = res.list;
+            for(let item of res.list[0].coups){
+            	item.show = false;
+            }
+            this.shop_detail = res.list[0];
+        }
+    },
+    showDetail:function(item){
+    	item.show = !item.show;
+    },
+    async getCoupon(id){
+    	let res = await this.$post(this.$api.receivecoup, {
+        	coupid: id
+        });
+        if (res && res._status == '200'){
+        	this.$createDialog({
+		        type: 'alert',
+		        icon: 'cubeic-right',
+		        showClose: true,
+		        title: '领取成功',
+		        content:'是否前往优惠券列表查看?',
+		        onConfirm: () => {
+		        	
+		        }
+		     }).show()
         }
     }
   }
@@ -127,10 +152,15 @@ export default {
 		.info_l{
 			width: 164px;
 			height: 164px;
-			background: #f00;
 			float: left;
 			border-radius: $size-radius;
 			margin-right: 14px;
+			overflow: hidden;
+			img{
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
 		}
 		.info_r{
 			float: left;

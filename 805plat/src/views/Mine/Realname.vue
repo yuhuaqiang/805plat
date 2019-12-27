@@ -96,6 +96,8 @@ export default {
 				height: 70px;
 				margin:0 auto;
 				font-size: 28px;
+				border-radius: 10px;
+				background-image: linear-gradient(#ff704c, #ff3231);
 			}
 		}
 		.tips{

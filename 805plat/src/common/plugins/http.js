@@ -77,6 +77,5 @@ const addCurrentUserParam = (data = {}) => {
             data.token = token
         }
     }
-
     return data
 }

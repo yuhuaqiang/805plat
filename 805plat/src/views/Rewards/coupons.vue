@@ -6,7 +6,7 @@
                 <img :src="item.small_pic">
             </div>
             <div class="shop_r">
-                <p class="title ellipsis">{{item.ditch_name}}</p>
+                <p class="title ellipsis">{{item.company_name}}</p>
                 <div class="shop_address">
                     <i></i>
                     <span class="ellipsis">{{item.address}}</span>
@@ -52,7 +52,7 @@ export default {
                 	let use_num = 0;
                 	let price = 0;
                 	for(let int of item.coups){
-                		use_num += Number(int.use_num);
+                		use_num += Number(int.total) - Number(int.valid_num);
                 		price += Number(int.price);
                 	}
                 	item.use_num = use_num;
@@ -70,6 +70,8 @@ export default {
 <style lang="stylus" scoped>
 .shop_list{
 	margin-top: 15px;
+	height: calc(100vh - 214px);
+	overflow: auto;
 	.shop_coupon{
 		width: 650px;
 		height: 200px;
