@@ -1,5 +1,6 @@
 <template>
     <!-- 店铺列表 -->
+    
     <div class="shop_list">
         <div class="shop_coupon" v-for="(item,index) in shopList" :key="item.ditch_num" @click="toShopdetail(item.ditch_num)">
             <div class="shop_l">

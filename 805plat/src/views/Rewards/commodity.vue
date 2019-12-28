@@ -1,6 +1,5 @@
 <template>
 	<div class="commody_list">
-		<!-- <Stitle icon="icon-fire" title="热门商品"></Stitle> -->
 		<!-- 卡 -->
 		<div class="card_list">
 			<div class="card" :class="item.className" v-for="(item,index) in card_list" @click="toPage(item)"></div>
