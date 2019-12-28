@@ -24,7 +24,7 @@ export default {
   async beforeCreate() {
     let url = window.location.href;
     let token = this.$route.query.token;
-    localStorage.setItem("vuex",'{"user":{"token":"72448210a22d5f2a8072ae4977ace851"}}');
+    //localStorage.setItem("vuex",'{"user":{"token":"72448210a22d5f2a8072ae4977ace851"}}');
     let vuexstorage = localStorage.getItem("vuex");
     let currentUser = "";
     if (vuexstorage) {

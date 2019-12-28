@@ -8,7 +8,7 @@
             我的金豆
             <i class="iconfont icon-ingot"></i>
           </div>
-          <div class="num">{{baseinfo.ingot}}</div>
+          <div class="num">{{baseinfo.ingot|formatNumberRgx}}</div>
         </div>
         <div class="btn-block">
           <button class="btn-banner" @click="purchasehandle"></button>
@@ -18,18 +18,31 @@
       <Stitle title="充值记录"></Stitle>
       <div class="list-block">
         <div class="list-container">
-          <!-- <cube-scroll> -->
-          <!-- <template v-if="item.list.length>0">
-            <ListItem
-              v-for="recorditem in item.list"
-              :key="recorditem.name"
-              :title="recorditem.name"
-              :time="recorditem.time"
-              :num="recorditem.num"
-            ></ListItem>
-          </template> -->
-          <!-- </cube-scroll> -->
-          <Empty :tip="tip"></Empty>
+          <div class="list-head">
+            <div class="head-item">金额</div>
+            <div class="head-item">金豆</div>
+            <!-- <div class="head-item">附赠金豆</div> -->
+            <div class="head-item">交易状态</div>
+            <div class="head-item">时间</div>
+          </div>
+          <template v-if="purchaselist.length>0">
+            <div
+              class="list-row"
+              v-for="item in purchaselist"
+              :key="item.order_no"
+              @click="godetail(item.order_no)"
+            >
+              <div class="row-item">
+                <i class="iconfont icon-money"></i>
+                {{item.money}}
+              </div>
+              <div class="row-item">{{item.total_ingot|formatNumberRgx}}</div>
+              <!-- <div class="row-item">{{item.mg_charm|formatNumberRgx}}</div> -->
+              <div class="row-item" :class="item.pay_status=='2'?'txt-success':item.pay_status=='3'?'txt-danger':''">{{item.pay_status|formatstatus}}</div>
+              <div class="row-item">{{item.create_time}}</div>
+            </div>
+          </template>
+          <Empty :tip="tip" v-else></Empty>
         </div>
       </div>
     </Xcont>
@@ -57,7 +70,17 @@ export default {
   data() {
     return {
       page: 1,
-      tip: "最近暂无充值记录~"
+      tip: "最近暂无充值记录~",
+      purchaselist: [
+        // {
+        //   order_no: 123,
+        //   money: 99,
+        //   mg_bean: 9900000,
+        //   mg_charm: 9900,
+        //   result_status: 1,
+        //   create_time: "12.27 13:34"
+        // }
+      ]
     };
   },
   created() {
@@ -78,9 +101,18 @@ export default {
       let param = {
         page: this.page
       };
-      //let purchaselist = await this.$get(this.$api.getbeanlist, param);
-
+      let purchaselist = await this.$get(this.$api.getpurchaselist, param);
+      console.log(purchaselist);
+      this.purchaselist = purchaselist.pay_list;
       this.page += 1;
+    },
+    godetail(orderno) {
+      this.$router.push({
+        name: "PurchaseDetail",
+        params: {
+          orderno
+        }
+      });
     }
   }
 };
@@ -140,8 +172,65 @@ export default {
 }
 
 .list-container {
-  width: calc(100% - 120px);
   margin: 0 auto;
   padding-bottom: $padding-l;
+
+  .list-head {
+    width: calc(100% - 40px);
+    height: 80px;
+    line-height: 80px;
+    margin: 0 $padding-l;
+    display: flex;
+    justify-content: space-between;
+    font-size: $size-s;
+    color: $color-deep;
+    border-bottom: 1px solid $color-regular-blue;
+
+    .head-item {
+      text-align center;
+      flex: 1;
+    }
+
+    .head-item:first-child {
+      width: 80px;
+      flex: none;
+    }
+
+    .head-item:last-child {
+      width: 160px;
+      flex: none;
+    }
+  }
+
+  .list-row {
+    width: calc(100% - 40px);
+    height: 80px;
+    line-height: 80px;
+    margin: 0 $padding-l;
+    display: flex;
+    justify-content: space-between;
+    font-size: $size-s;
+    color: $color-shallow;
+    border-bottom 1px solid $color-border
+
+    .row-item {
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+      .iconfont{
+        color: $color-regular-blue
+      }
+    }
+
+    .row-item:first-child {
+      width: 80px;
+      flex: none;
+    }
+
+    .row-item:last-child {
+      width: 160px;
+      flex: none;
+    }
+  }
 }
 </style>

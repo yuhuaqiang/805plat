@@ -41,6 +41,7 @@ export default {
   },
   created() {
     this.getpayitem();
+    
     this.wxstart();
   },
   computed: {
@@ -71,6 +72,7 @@ export default {
       });
     },
     async createorder(product_id) {
+      debugger
       let param = {
         pay_num: 1,
         pay_type: 3,
