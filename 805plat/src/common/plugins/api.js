@@ -19,7 +19,7 @@ const api = {
     goodsdetail:baseUrl+"/gameshop/detail",//获取商品详情
     convertgoods:baseUrl+"/gameshop/convertgoods",//商品兑换
     convertgoodsExchange:baseUrl+"/gameshop/convertgoods2",//商品兑换
-    listhot:baseUrl+"/gameshop/listhot",//热门商品
+    listhot:baseUrl+"/gameshop/listhot",//热门商品  
     getwxconfig:baseUrl+"/weixin/share",//获取微信jssdk config
     createorder:baseUrl+"/gamepay/createorder",
     getpayconfig:baseUrl+"/gamepay/payup",
