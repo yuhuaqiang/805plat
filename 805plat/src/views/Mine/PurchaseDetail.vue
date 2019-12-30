@@ -4,7 +4,7 @@
     <Xcont :header="true">
       <div class="container">
         <div class="info-title">
-          <i class="iconfont icon-ingot"></i>999
+          <i class="iconfont icon-ingot"></i>{{purchasedetail.total_ingot|formatNumberRgx}}
         </div>
         <div class="info-list">
           <div class="info-row">

@@ -42,12 +42,15 @@ export function formatNumberRgx(num) {
 
 //时间戳转日期
 export function timestampToDate(timestamp) {
-    timestamp = timestamp.toString();
-    if (timestamp.length === 10) {
-        timestamp += "000"
+    let datestr = ""
+    if (timestamp) {
+        timestamp = timestamp.toString();
+        if (timestamp.length === 10) {
+            timestamp += "000"
+        }
+        let dateobj = new Date(parseInt(timestamp));
+        datestr = timeFormat(dateobj, "YYYY-MM-DD");
     }
-    let dateobj = new Date(parseInt(timestamp));
-    let datestr = timeFormat(dateobj, "YYYY-MM-DD");
     return datestr;
 }
 
@@ -59,11 +62,11 @@ export function timeFormat(value, format, src = 'YYYY-MM-DD') {
 
 //充值状态转换
 export function formatstatus(status) {
-    let statusenum={
-        "1":"充值中",
-        "2":"成功",
-        "3":"失败",
-        "4":"关闭"
+    let statusenum = {
+        "1": "充值中",
+        "2": "成功",
+        "3": "失败",
+        "4": "关闭"
     }
     return statusenum[status];
 }
