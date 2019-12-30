@@ -46,7 +46,7 @@ export default {
     handleLeft() {
       this.$emit("leftClick");
       if (this.routerBack === false) {
-        return;
+        return;  
       }
       if (this.back) {
         this.$router.back();
