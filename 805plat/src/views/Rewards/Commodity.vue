@@ -87,8 +87,8 @@
 			},
 			goDetail:function(id){
 				 this.$router.push({
-	            	path:"/rewards/shopdetail/detail",
-	            	query:{
+	            	name:"Goodsdetail",
+	            	params:{
 	            		id: id
 	            	}
 	            });

@@ -47,7 +47,7 @@
 		 				<div class="exchange">立即兑换</div>
 		 			</div>
 		 		</div>
-		 		<transition name="" enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+		 		<transition name="expand">
 		 		<div class="coupon_detail" v-if="item.show">
 		 			<div class="instructions">
 		 				<span>兑换说明</span>
@@ -96,7 +96,7 @@ export default {
 	};
   },
   created(){
-  	this.shopId = this.$route.query.id;
+  	this.shopId = this.$route.params.id;
   	this.couplist(this.shopId);
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
 		        title: '领取成功',
 		        content:'是否前往优惠券列表查看?',
 		        onConfirm: () => {
-		        	
+		        	this.$router.push('/mine/Coupon');
 		        }
 		     }).show()
         }
@@ -359,5 +359,18 @@ export default {
 		
 	}
 }
-	
+.expand-enter-active{
+	height: 351px;;
+	overflow: hidden;
+	transition: all 1.5s;
+}
+.expand-leave-active{
+	height: 0px;
+	overflow: hidden;
+	transition: all 1s;
+}
+.expand-enter, .expand-leave{
+	height: 0;
+	opacity: 0;
+}
 </style>

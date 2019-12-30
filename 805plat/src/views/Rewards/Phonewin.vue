@@ -1,12 +1,12 @@
 <template>
     <cube-popup type="extend-popup" ref="popup" :mask="true">
     	<div class="address">
-    		<div class="title">抽话费</div>
+    		<div class="title">{{content}}</div>
     		<p>手机号码:</p>
     		<div class="box">
     			<cube-input v-model="phone" placeholder="请输入手机号码" type="number" :maxlength="11"></cube-input>
     		</div>
-    		<p class="tip">此次抽奖将话费"<span>{{use_num | formatNumberRgx}}积分</span>"</p>
+    		<p class="tip">此次抽奖将花费"<span>{{use_num | formatNumberRgx}}积分</span>"</p>
 			<div class="btn">
 				<cube-button :primary="true" @click="changeGoods()">确 定</cube-button>
 			</div>
@@ -93,7 +93,7 @@ export default {
 			        title: "提交成功",
 			        content: "商品将在1-3个工作日发送给您,请到'商品订单记录'中查看物流信息",
 			        onConfirm: () => {
-			        	// this.confirmGoods();
+			        	this.$router.push('/order/Orderlist');
 			        }
 			    }).show();
         	}
@@ -117,14 +117,14 @@ export default {
 		}
 		p{
 			color: #666;
-			font-size: 30px;
+			font-size: 24px;
 			padding: 10px 0;
 		}
 		.box{
 			height: auto;
 			margin-bottom: 20px;
 			input{
-				font-size: 24px;
+				font-size: 28px;
 				height: 60px;
 				border: none;
 				

@@ -121,7 +121,7 @@
 			}
 		},
 		created(){
-			this.goods_code = this.$route.query.id;
+			this.goods_code = this.$route.params.id;
 			this.getDetail();
 		},
 		mounted(){

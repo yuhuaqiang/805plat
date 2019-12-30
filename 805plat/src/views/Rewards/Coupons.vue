@@ -39,8 +39,8 @@ export default {
     methods: {
         toShopdetail: function(id) {
             this.$router.push({
-            	path:"/rewards/shopdetail",
-            	query:{
+            	name:"Shopdetail",
+            	params:{
             		id: id
             	}
             });

@@ -1,6 +1,6 @@
 <template>
   <div>
-	<Xheader title="领奖" :back="false" right="icon-history-record"></Xheader>
+	<Xheader title="领奖" :back="false" right="icon-history-record" @rightClick="navigate('/order/Orderlist')"></Xheader>
 	 <Xcont :header="true">
 	 	<div class="container">
 	        <div class="tab-container">

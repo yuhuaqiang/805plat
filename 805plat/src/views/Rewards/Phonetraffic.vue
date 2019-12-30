@@ -31,7 +31,7 @@
 		            <p>5. 您可以为自己或者家人朋友充值哦~</p>
 		        </div>
 			</div>
-			<cubePop :infomation="info" ref="extendPopup"></cubePop>
+			<cubePop content="抽话费" :infomation="info" ref="extendPopup"></cubePop>
 		</Xcont>
 	</div>
 	

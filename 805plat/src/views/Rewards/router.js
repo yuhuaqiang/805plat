@@ -15,7 +15,7 @@ export default [
         },
     },
     {
-        path: '/rewards/shopdetail',
+        path: '/rewards/shopdetail/:id',
         name: 'Shopdetail',
         component: Shopdetail,
         meta: {
@@ -23,7 +23,7 @@ export default [
         },
     },
     {
-        path: '/rewards/shopdetail/detail',
+        path: '/rewards/shopdetail/detail/:id',
         name: 'Goodsdetail',
         component: Goodsdetail,
         meta: {

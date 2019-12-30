@@ -120,7 +120,7 @@ export default {
 			        title: "提示",
 			        content: "商品将在7个工作日邮寄给您,请到'商品订单记录'中查看物流信息",
 			        onConfirm: () => {
-			        	// this.confirmGoods();
+			        	this.$router.push('/order/Orderlist');
 			        }
 			    }).show();
         	}
