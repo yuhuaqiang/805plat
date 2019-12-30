@@ -33,6 +33,7 @@
           </div>
         </div>
       </div>
+      <div class="btn-block"></div>
     </Xcont>
   </div>
 </template>
