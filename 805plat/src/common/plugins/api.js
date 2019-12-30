@@ -21,11 +21,13 @@ const api = {
     convertgoodsExchange:baseUrl+"/gameshop/convertgoods2",//商品兑换
     listhot:baseUrl+"/gameshop/listhot",//热门商品  
     getwxconfig:baseUrl+"/weixin/share",//获取微信jssdk config
-    createorder:baseUrl+"/gamepay/createorder",
-    getpayconfig:baseUrl+"/gamepay/payup",
-    getmycoupon:baseUrl+"/gameuser/mymchcoupons",
-    getpurchaselist:baseUrl+"/gameuser/paywaterlist",
-    getpurchasedetail:baseUrl+"/gameuser/paywaterinfo",
+    createorder:baseUrl+"/gamepay/createorder",//创建订单
+    getpayconfig:baseUrl+"/gamepay/payup",//获取支付信息
+    getmycoupon:baseUrl+"/gameuser/mymchcoupons",//获取个人优惠券
+    getpurchaselist:baseUrl+"/gameuser/paywaterlist",//获取充值记录列表
+    getpurchasedetail:baseUrl+"/gameuser/paywaterinfo",//获取充值订单详情
+    getorderlist:baseUrl+"/gameuser/ajaxexchangelist",//获取订单列表
+    getorderdetail:baseUrl+"/gameuser/exchangedetail"
 }
 
 export default api
