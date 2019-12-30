@@ -362,12 +362,12 @@ export default {
 .expand-enter-active{
 	height: 351px;;
 	overflow: hidden;
-	transition: all 1.5s;
+	transition: all 1s;
 }
 .expand-leave-active{
-	height: 0px;
-	overflow: hidden;
-	transition: all 1s;
+	// height: 0px;
+	// overflow: hidden;
+	// transition: all 1s;
 }
 .expand-enter, .expand-leave{
 	height: 0;
