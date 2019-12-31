@@ -51,6 +51,9 @@
           </cube-tab-panels>
         </div>
       </div>
+      <div class="btn-block" v-show="selectedLabel=='领奖'">
+        <cube-button class="btn-primary" :primary="true" @click="gorewards">开始抽奖</cube-button>
+      </div>
     </Xcont>
   </div>
 </template>
@@ -169,6 +172,11 @@ export default {
           orderid
         }
       });
+    },
+    gorewards() {
+      this.$router.push({
+        name: "Rewards"
+      });
     }
   }
 };
@@ -237,6 +245,23 @@ export default {
         }
       }
     }
+  }
+}
+
+.btn-block {
+  position: fixed;
+  bottom: $padding-l;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .btn-primary {
+    width: 450px;
+    height: 70px;
+    margin: 0 auto;
+    font-size: 28px;
+    border-radius: 10px;
+    background-image: linear-gradient(#ff704c, #ff3231);
   }
 }
 </style>
