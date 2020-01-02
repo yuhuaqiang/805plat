@@ -31,7 +31,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import wx from "weixin-js-sdk";
+
 export default {
   props: {},
   data() {
@@ -61,7 +61,7 @@ export default {
       let config = await this.$get(this.$api.getwxconfig, {
         url: window.location.href
       });
-      wx.config({
+      this.$wx.config({
         beta: true,
         debug: false,
         appId: config.appid,
@@ -72,7 +72,7 @@ export default {
       });
     },
     async createorder(product_id) {
-      debugger
+      
       let param = {
         pay_num: 1,
         pay_type: 3,
@@ -93,7 +93,7 @@ export default {
 			    this.toast.show();
       }
 
-      wx.invoke(
+      this.$wx.invoke(
         "getBrandWCPayRequest",
         {
           appId: orderconfig.appId, //公众号名称，由商户传入
