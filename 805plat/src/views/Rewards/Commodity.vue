@@ -5,13 +5,14 @@
 			<div class="card" :class="item.className" v-for="(item,index) in card_list" @click="toPage(item)"></div>
 		</div>
 		<div class="goods_list">
-			<div class="tab-container" v-if="tabs.length > 0">
+			<!-- <div class="tab-container" v-if="tabs.length > 0">
 	          <cube-tab-bar class="tab-rank" v-model="selectedLabel" show-slider inline @click="clickHandler">
 	            <cube-tab v-for="(item) in tabs" :label="item.label" :key="item.label">
 	              <div class="tab-title" slot="default">{{item.value}}</div>
 	            </cube-tab>
 	          </cube-tab-bar>
-	        </div>
+	        </div> -->
+	        <cube-scroll-nav-bar :current="selectedLabel" :labels="tabs" @change="clickHandler" />
 	        <div class="goods">
 	        	<div class="img_box" v-for="(item,index) in goodsList" :key="item.goods_id" @click="goDetail(item.goods_code)">
 	        		<img :src="item.goods_cover">
@@ -51,6 +52,7 @@
 				}],
 				selectedLabel: "",
 			    tabs: [],//商品分类列表
+			    allTab:[],
 			    goodsList:[] //商品列表
 			}
 		},
@@ -58,19 +60,22 @@
 			async getCates(){
 				let res = await this.$post(this.$api.cates, "");
 				if (res && res._status == '200'){
-					let tabs = [{
-						label: "0",
-			          	value: '全部商品'
+					let tabs = ['全部商品'];
+					let allTab = [{
+						id: '0',
+						value: '全部商品'
 					}]
 					for(let item of res.list){
 						let obj = {
-							label: item.id,
+							id: item.id,
 							value: item.cate_name
 						}
-						tabs.push(obj);
+						tabs.push(item.cate_name);
+						allTab.push(obj);
 					}
 					this.tabs = tabs;
-					this.selectedLabel = "0";
+					this.allTab = allTab;
+					this.selectedLabel = "全部商品";
 				}
 			},
 			async getshopList(id){
@@ -82,8 +87,7 @@
 				}
 			},
 			clickHandler:function(label){
-				console.log(label)
-				this.getshopList(label);
+				this.getshopList(this.getId(label));
 			},
 			goDetail:function(id){
 				 this.$router.push({
@@ -95,6 +99,16 @@
 			},
 			toPage:function(item){
 				this.$router.push(item.path);
+			},
+			getId:function(value){
+				let id = "0";
+				for(let item of this.allTab){
+					if(item.value == value){
+						id = item.id;
+						break;
+					}
+				}
+				return id;
 			}
 		},
 		created(){
