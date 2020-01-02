@@ -68,7 +68,7 @@
 		 			</div>
 		 			<div class="cond_detail clearfix">
 		 				<div class="cond_l">使用规则:</div>
-		 				<div class="cond_r">{{item.use_rule}}</div>
+		 				<div class="cond_r" v-html="line2br(item.use_rule)"></div>
 		 			</div>
 		 		</div>
 		 		</transition>
@@ -109,10 +109,15 @@ export default {
             for(let item of res.list[0].coups){
             	item.show = false;
             }
-            this.shop_detail = res.list[0];
+            this.shop_detail = res.list[0];	
         }
     },
     showDetail:function(item){
+    	for(let int of this.shop_detail.coups){
+    		if(int.ditch_num != item.ditch_num){
+    			int.show = false;
+    		}
+    	}
     	item.show = !item.show;
     },
     async getCoupon(id){
@@ -131,7 +136,10 @@ export default {
 		        }
 		     }).show()
         }
-    }
+    },
+    line2br:function(text) {
+		return text.split('\n').join('<br/>');
+	}
   }
 };
 </script>

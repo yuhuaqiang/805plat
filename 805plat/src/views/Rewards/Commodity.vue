@@ -167,6 +167,7 @@
 		border-radius: $size-radius;
 		background: #fff;
 		margin: 0 auto;
+		overflow: hidden;
 		.goods{
 			height: calc(100vh - 506px);
 			background: #fff;
