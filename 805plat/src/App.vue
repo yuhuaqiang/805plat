@@ -22,34 +22,74 @@ export default {
     };
   },
   async beforeCreate() {
-    let url = window.location.href;
-    let token = this.$route.query.token;
-    localStorage.setItem("vuex",'{"user":{"token":"72448210a22d5f2a8072ae4977ace851"}}');
-    let vuexstorage = localStorage.getItem("vuex");
-    let currentUser = "";
-    if (vuexstorage) {
-      let vuexobj = JSON.parse(vuexstorage);
-      if (vuexobj.user) {
-        currentUser = vuexobj.user.token;
+    let status = this.$route.query.status;
+    if (status) {
+      this.$router.push({
+        name: "collect"
+      });
+    } else {
+      let url = window.location.href;
+
+      let token = this.$route.query.token;
+      let vuexstorage = localStorage.getItem("vuex");
+
+      let currentUser = "";
+      if (vuexstorage) {
+        let vuexobj = JSON.parse(vuexstorage);
+
+        if (vuexobj.user) {
+          currentUser = vuexobj.user.token;
+        }
+      }
+      if (currentUser) {
+        return;
+      } else if (!currentUser && token) {
+        await this.$store.dispatch("_currentUser", token);
+      }
+      if (!currentUser && !token) {
+        url = escape(url);
+        window.location.href = this.$api.gettoken + "?ref=" + url;
       }
     }
-    if (currentUser) {
-      return;
-    } else if (!currentUser && token) {
-      await this.$store.dispatch("_currentUser", token);
-      this.$router.push(this.$route.path);
-    }
-    if (!this.currentUser && !token) {
-      url = escape(url);
-      window.location.href = this.$api.gettoken + "?ref=" + url;
-    }
+  },
+  created() {
+    this.wxstart();
   },
   computed: {
     ...mapState({
       token: state => state.user.token
     })
   },
-  methods: {}
+  methods: {
+    async wxstart() {
+      let that = this;
+      let config = await this.$get(this.$api.getwxconfig, {
+        url: window.location.href
+      });
+      this.$wx.config({
+        beta: true,
+        debug: false,
+        appId: config.appid,
+        timestamp: config.timestamp,
+        nonceStr: config.nonceStr,
+        signature: config.signature,
+        jsApiList: ["getBrandWCPayRequest", "showMenuItems", "hideMenuItems"]
+      });
+
+      that.$wx.ready(function() {
+        that.$wx.hideMenuItems({
+          menuList: [
+            "menuItem:share:qq",
+            "menuItem:share:weiboApp",
+            "menuItem:share:facebook",
+            "menuItem:share:QZone",
+            "menuItem:openWithQQBrowser",
+            "menuItem:openWithSafari"
+          ]
+        });
+      });
+    }
+  }
 };
 </script>
 
