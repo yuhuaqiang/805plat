@@ -12,7 +12,7 @@ export default [
         component: Rewards,
         meta: {
             sort: 3001,
-            keepalive: true,
+            // keepalive: true,
         },
     },
     {

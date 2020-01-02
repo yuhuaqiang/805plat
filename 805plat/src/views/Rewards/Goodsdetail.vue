@@ -124,9 +124,6 @@
 			this.goods_code = this.$route.params.id;
 			this.getDetail();
 		},
-		mounted(){
-
-		},
 		components:{
 			Xheader,
 			Xcont,

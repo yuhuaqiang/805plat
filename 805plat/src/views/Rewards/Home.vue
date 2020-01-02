@@ -23,7 +23,7 @@ import Xheader from "@/components/layout/Xheader.vue";
 import Xcont from "@/components/layout/Xcontent.vue";
 import coupons from "@/views/Rewards/Coupons.vue";
 import commodity from "@/views/Rewards/Commodity.vue";
-// import {localData} from "@/common/plugins/filters.js";
+import {localData} from "@/common/plugins/filters.js";
 export default {
   name: "Rewards",
   components: {
@@ -58,16 +58,16 @@ export default {
 	  this.$router.push(path);
 	}
   },
-  // created(){
-  // 	let selectedLabel = localData('get','selectedLabel');
-  // 	if(selectedLabel == 1){
-  // 		this.selectedLabel = Number(selectedLabel);
-  // 		this.isCompoent = 'commodity';
-  // 	}
-  // },
-  // destroyed(){
-  // 	localData("set","selectedLabel",this.selectedLabel);     
-  // }
+  created(){
+  	let selectedLabel = localData('get','selectedLabel');
+  	if(selectedLabel == 1){
+  		this.selectedLabel = Number(selectedLabel);
+  		this.isCompoent = 'commodity';
+  	}
+  },
+  destroyed(){
+  	localData("set","selectedLabel",this.selectedLabel);     
+  }
 };
 </script>
 <style lang="stylus" scoped>

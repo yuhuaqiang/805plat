@@ -114,7 +114,7 @@ export default {
     },
     showDetail:function(item){
     	for(let int of this.shop_detail.coups){
-    		if(int.ditch_num != item.ditch_num){
+    		if(int.id != item.id){
     			int.show = false;
     		}
     	}
