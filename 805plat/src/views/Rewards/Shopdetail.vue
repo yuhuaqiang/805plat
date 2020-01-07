@@ -21,7 +21,7 @@
         			</div>
 	 			</div>
 	 		</div>
-	 		<section v-for="(item,index) in shop_detail.coups" :key="item.id">
+	 		<section v-for="(item) in shop_detail.coups" :key="item.id">
 		 		<div class="shop_coupon">
 		 			<div class="coupon_l">
 		 				<p>￥<span>{{Number(item.price)}}</span></p>
@@ -157,6 +157,8 @@ export default {
 		padding: 24px 0 24px 24px;
 		overflow: hidden;
 		margin-bottom: 24px;
+		display flex;
+		align-items center;
 		.info_l{
 			width: 164px;
 			height: 164px;
@@ -175,8 +177,10 @@ export default {
 			.title{
 				font-size: 26px;
 				color: #555;
+				height 30px;
+				line-height 30px;
 				width: 350px;
-				margin-bottom: 9px;
+				margin-bottom: 5px;
 			}
 			.shop_address{
 				i{
@@ -193,6 +197,8 @@ export default {
 				span{
 					display: block;
 					width: 380px;
+					height 29px;
+					line-height 29px;
 					font-size: 24px;
 					color: #838383;
 				}
