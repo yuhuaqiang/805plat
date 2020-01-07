@@ -2,7 +2,7 @@
   <header>
     <div class="left" @click="handleLeft">
       <slot name="left" v-if="back">
-        <span class="iconfont iconarrow-left"></span>
+        <span class="iconfont icon-arrow-left"></span>
       </slot>
     </div>
     <div class="title">
@@ -46,7 +46,7 @@ export default {
     handleLeft() {
       this.$emit("leftClick");
       if (this.routerBack === false) {
-        return;
+        return;  
       }
       if (this.back) {
         this.$router.back();
@@ -61,30 +61,31 @@ export default {
 <style lang="stylus" scope>
 header {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: $height-header;
+  // line-height: $height-header;
   background: #F82A31;
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
   position: fixed;
+  font-size:$size-m;
   top: 0;
   color: #fff;
+  z-index:999;
 
   .left, .right {
-    width: 40px;
+    width: 90px;
     text-align: center;
   }
 
   .title {
     flex: 1;
     text-align: center;
-    font-size: 16px;
   }
 
   .iconfont {
-    font-size: 18px;
+    font-size: 48px;
   }
 }
 </style>

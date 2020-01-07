@@ -1,5 +1,5 @@
 const state = {
-	current: {},
+	token:""
 }
 
 const actions = {
@@ -12,7 +12,7 @@ const actions = {
 
 const mutations = {
 	'@user/current'(state, data) {
-		state.current = data
+		state.token = data
 	},
 }
 
